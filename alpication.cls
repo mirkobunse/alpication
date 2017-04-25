@@ -74,12 +74,14 @@
 	\newcommand{\aPicture}{}
 	\newcommand{\aSign}{}
 	\newcommand{\toAddr}{}
-
+	\newcommand{\aXING}{}
+	
 	\newcommand{\applicantName}[1]{\newcommand{\aName}{#1}}
 	\newcommand{\applicantStreet}[1]{\newcommand{\aStreet}{#1}}
 	\newcommand{\applicantCity}[1]{\newcommand{\aCity}{#1}}
 	\newcommand{\applicantPhone}[1]{\newcommand{\aPhone}{#1}}
 	\newcommand{\applicantMail}[1]{\newcommand{\aMail}{#1}}
+	\newcommand{\applicantXING}[1]{\renewcommand{\aXING}{#1}}
 	
 	\newcommand{\applicantPicture}[1]{\renewcommand{\aPicture}{#1}}
 	\newcommand{\applicantSign}[1]{\renewcommand{\aSign}{#1}}
@@ -221,6 +223,7 @@
 				      \aCity
 				\item \Ltelephone: \aPhone\\
 				      \Lmail: \href{mailto:\aMail}{\texttt{\aMail}}
+				      \ifthenelse{\equal{\aXING}{}}{}{\\\href{https://www.xing.com/profile/\aXING}{\texttt{xing.com/profile/\aXING}}}
 				\item \Lborn~\aBirthday\, \Lin~\aBirthplace\\
 				      \aFamilyStatus, \aNationality
 			\end{cvsection}
