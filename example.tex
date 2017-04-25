@@ -1,0 +1,69 @@
+\documentclass[german]{alpication}
+
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[ngerman]{babel}
+
+
+	\author{Max Mustermann}
+	\title{Bewerbung}
+
+% Bewerberinformation
+
+	\applicantName		{Max Mustermann}
+	\applicantStreet	{Musterstraße 1b}
+	\applicantCity		{12345 Musterstadt}
+	\applicantPhone		{0123\,456\,78\,910}
+	\applicantMail		{muster@mail.de}
+	
+	\applicantPicture	{examplePic.png}
+	\applicantSign		{exampleSign.png}
+	\signCity		{Musterstadt}
+	
+	\applicantBirthday	{01.02.1934}
+	\applicantBirthplace	{Musterstadt}
+	\applicantFamilyStatus	{Ledig}
+	\applicantNationality	{Deutsch}
+	
+	\toAddress	{	Paul Personaler\\
+				Muster GmbH\\
+				Musterstraße 42\\
+				12345 Musterstadt		}
+
+\begin{document}
+
+% Das Anschreiben
+
+\begin{correspondance}{Bewerbung als Patroneur}
+	\opening{Sehr geehrter Herr Personaler,}
+
+	Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+	et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+	
+	Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+	consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+	sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+	takimata sanctus est Lorem ipsum dolor sit amet.
+
+	\closing{Mit freundlichen Grüßen}
+\end{correspondance}
+
+	
+% Der Lebenslauf
+
+\begin{curriculumvitae}
+	\begin{cvsection}{Schulbildung}
+		\item [04/1956 -- 05/1960] 	Muster-Grundschule Musterstadt
+		\item [07/1960 -- 05/1966] 	Städtische Realschule Musterstadt
+	\end{cvsection}
+
+	\begin{cvsection}{Ausbildung}
+		\item [06/1966 -- 08/1969] 	Patroneursausbildung bei Stickerei Mustermacher, Spezialisierung auf Gewebe
+		\item [07/1968]			Muster-Design-Workshop
+	\end{cvsection}
+\end{curriculumvitae}
+
+
+\end{document}
