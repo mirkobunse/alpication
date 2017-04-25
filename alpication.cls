@@ -37,6 +37,7 @@
 	\RequirePackage{graphicx}
 	\RequirePackage{fancyhdr}
 	\RequirePackage{eso-pic}
+	\RequirePackage[hidelinks]{hyperref}
 	
 %
 % internationalization
@@ -57,7 +58,6 @@
 		\renewcommand{\Lpersinfo}{Pers\"onliche Informationen}
 		\renewcommand{\Lcurrvitae}{Lebenslauf}
 		\renewcommand{\Ltelephone}{Telefon}
-		\renewcommand{\Lmail}{E-Mail}
 		\renewcommand{\Lborn}{Geb. am}
 		\renewcommand{\Lin}{in}
 		\renewcommand{\Lthe}{den}
@@ -114,7 +114,7 @@
 
 		\lfoot{\small\sffamily\aName}
 		\cfoot{\small\sffamily\aStreet~\\\aCity}
-		\rfoot{\small\sffamily\aPhone~\\\aMail}
+		\rfoot{\small\sffamily\aPhone~\\\href{mailto:\aMail}{\texttt{\aMail}}}
 		
 	}
 	
@@ -220,7 +220,7 @@
 				      \aStreet\\
 				      \aCity
 				\item \Ltelephone: \aPhone\\
-				      \Lmail: \aMail
+				      \Lmail: \href{mailto:\aMail}{\texttt{\aMail}}
 				\item \Lborn~\aBirthday\, \Lin~\aBirthplace\\
 				      \aFamilyStatus, \aNationality
 			\end{cvsection}
