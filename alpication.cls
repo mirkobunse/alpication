@@ -122,9 +122,9 @@
 	}
 	
 %
-% correspondance environment
+% correspondence environment
 %
-	\newenvironment{correspondance}[1]
+	\newenvironment{correspondence}[1]
 	% on begin
 	{
 	
@@ -149,7 +149,7 @@
 	
 		\vspace{0mm}
 		
-		% the correspondance
+		% the correspondence
 	
 		\textbf{\large\sffamily#1}		% the subject
 
@@ -176,7 +176,7 @@
 	}
 	
 %
-% opening / closing commands for correspondance
+% opening / closing commands for the correspondence
 %
 	\newcommand{\opening}[1]{#1\vspace{4mm}}
 	\newcommand{\closing}[1]{\vspace{4mm}#1}
