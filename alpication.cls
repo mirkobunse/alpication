@@ -38,6 +38,7 @@
 	\RequirePackage{fancyhdr}
 	\RequirePackage{eso-pic}
 	\RequirePackage[hidelinks]{hyperref}
+	\RequirePackage{pdfpages}
 	
 %
 % internationalization
@@ -237,4 +238,11 @@
 		\end{cv}
 		
 	}
+
+% 
+% appendix command
+% 
+	\newcommand{\apxFolder}{.}
+	\newcommand{\appendixFolder}[1]{\renewcommand{\apxFolder}{#1}}
+	\newcommand{\append}[1]{\includepdf[pages=-]{\apxFolder/#1}}
 

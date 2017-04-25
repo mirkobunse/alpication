@@ -10,8 +10,9 @@
 	\author{Max Mustermann}
 	\title{Bewerbung}
 
-% Bewerberinformation
-
+% 
+% Informationen zum Bewerber
+% 
 	\applicantName		{Max Mustermann}
 	\applicantStreet	{Musterstraße 1b}
 	\applicantCity		{12345 Musterstadt}
@@ -35,8 +36,9 @@
 
 \begin{document}
 
+% 
 % Das Anschreiben
-
+% 
 \begin{correspondance}{Bewerbung als Patroneur}
 	\opening{Sehr geehrter Herr Personaler,}
 
@@ -51,9 +53,9 @@
 	\closing{Mit freundlichen Grüßen}
 \end{correspondance}
 
-	
+% 
 % Der Lebenslauf
-
+% 
 \begin{curriculumvitae}
 	\begin{cvsection}{Schulbildung}
 		\item [04/1956 -- 05/1960] 	Muster-Grundschule Musterstadt
@@ -65,6 +67,13 @@
 		\item [07/1968]			Muster-Design-Workshop
 	\end{cvsection}
 \end{curriculumvitae}
+
+% 
+% Anhänge
+% 
+\appendixFolder{./appendix}
+\append{example}
+%\append{...}
 
 
 \end{document}
