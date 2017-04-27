@@ -24,6 +24,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{alpication}[2017/04/25 Alpication]
 
+\newwrite\apxList % temporary file for appendix list
 
 %
 % dependencies
@@ -39,7 +40,8 @@
 	\RequirePackage{eso-pic}
 	\RequirePackage[hidelinks]{hyperref}
 	\RequirePackage{pdfpages}
-	
+	\RequirePackage{enumitem}
+
 %
 % internationalization
 %
@@ -52,6 +54,7 @@
 	\newcommand{\Lborn}{Born on}
 	\newcommand{\Lin}{in}
 	\newcommand{\Lthe}{}
+	\newcommand{\Lappendix}{Appendix}
 	\newcommand{\Lmotivation}{Motivation}
 	
 	% german
@@ -63,6 +66,7 @@
 		\renewcommand{\Lborn}{Geb. am}
 		\renewcommand{\Lin}{in}
 		\renewcommand{\Lthe}{den}
+		\renewcommand{\Lappendix}{Anhang}
 		\renewcommand{\Lmotivation}{Motivationsschreiben}
 	}
 	
@@ -98,9 +102,14 @@
 	\newcommand{\toAddress}[1]{\renewcommand{\toAddr}{#1}}
 	
 %
-% beginning of document
+% beginning and end of document
 %
 	\AtBeginDocument{
+		
+		% open appendix list writer
+		\openout\apxList=\jobname.apx	% not opening immediately allows to input the file to produce a list
+		\write\apxList{\textbf{\Lappendix:}}
+		\write\apxList{\string\begin{itemize}[nosep]}
 		
 		% parskip and -indent
 		\setlength{\parskip}{8pt}
@@ -120,6 +129,13 @@
 		\lfoot{\small\sffamily\aName}
 		\cfoot{\small\sffamily\aStreet~\\\aCity}
 		\rfoot{\small\sffamily\aPhone~\\\href{mailto:\aMail}{\texttt{\aMail}}}
+		
+	}
+	
+	\AtEndDocument{
+		
+		\immediate\write\apxList{\string\end{itemize}}
+		\immediate\closeout\apxList
 		
 	}
 	
@@ -156,9 +172,22 @@
 		\textbf{\large\sffamily#1}		% the subject
 
 		\vspace{8mm}
+		
 	}
 	% on end
 	{
+		
+		\pagebreak
+		
+	}
+	
+%
+% opening / closing commands for the correspondence
+%
+	\newcommand{\opening}[1]{#1\vspace{4mm}}
+	\newcommand{\closing}[1]{%
+	
+		\vspace{4mm}#1
 		
 		\ifthenelse{\equal{\aSign}{}}{\vspace{8mm}}
 		{ % only print signet, if actually defined
@@ -172,16 +201,8 @@
 		\vspace{-3mm}
 			
 		\aName
-			
-		\pagebreak
 		
 	}
-	
-%
-% opening / closing commands for the correspondence
-%
-	\newcommand{\opening}[1]{#1\vspace{4mm}}
-	\newcommand{\closing}[1]{\vspace{4mm}#1}
 	
 % 
 % motivation environment (may be relevant for university and internship applications)
@@ -262,9 +283,20 @@
 	}
 
 % 
-% appendix command
+% appendix commands with automatic list
 % 
 	\newcommand{\apxFolder}{.}
 	\newcommand{\appendixFolder}[1]{\renewcommand{\apxFolder}{#1}}
-	\newcommand{\append}[1]{\includepdf[pages=-]{\apxFolder/#1}}
-
+	
+	\newcommand{\append}[2]{%
+	  \immediate\write\apxList{\noexpand\item #1} % append name to file
+	  \includepdf[pages=-]{\apxFolder/#2}
+	}
+	
+	% read appendix list from file if it exists. Otherwise, emit a warning.
+	\newcommand{\appendixList}{\IfFileExists{\jobname.apx}{%
+	  \vspace*{8mm}
+	  \input\jobname.apx
+	}{%
+	  \ClassWarning{alpication}{File \jobname.apx is missing. Re-run to get references right.}
+	}}

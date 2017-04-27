@@ -51,6 +51,9 @@
 	takimata sanctus est Lorem ipsum dolor sit amet.
 
 	\closing{Mit freundlichen Grüßen}
+	
+	\appendixList	% optional: Auflistung der Anhänge, benötigt 2-fache Ausführung von LaTeX
+	
 \end{correspondence}
 
 % 
@@ -84,8 +87,8 @@
 % Anhänge (optional)
 % 
 \appendixFolder{./appendix}
-\append{example}
-%\append{...}
+\append{Beispiel-Dokument}{example}	% \append{Name (für optionale Auflistung)}{Dateiname im appendixFolder}
+%\append{...}{...}
 
 
 \end{document}
