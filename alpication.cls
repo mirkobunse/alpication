@@ -288,9 +288,12 @@
 	\newcommand{\apxFolder}{.}
 	\newcommand{\appendixFolder}[1]{\renewcommand{\apxFolder}{#1}}
 	
+	\newcounter{apxRefCounter}
+	
 	\newcommand{\append}[2]{%
-	  \immediate\write\apxList{\noexpand\item #1} % append name to file
-	  \includepdf[pages=-]{\apxFolder/#2}
+	  \immediate\write\apxList{\noexpand\item \string\hyperlink{apxRefCounter\theapxRefCounter.1}{#1}} % append name to file
+	  \includepdf[pages=-,link,linkname={apxRefCounter\theapxRefCounter}]{\apxFolder/#2}
+	  \refstepcounter{apxRefCounter}
 	}
 	
 	% read appendix list from file if it exists. Otherwise, emit a warning.
