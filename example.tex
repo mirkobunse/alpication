@@ -18,7 +18,7 @@
 	\applicantCity		{12345 Musterstadt}
 	\applicantPhone		{0123\,456\,78\,910}
 	\applicantMail		{muster@mail.de}
-	\applicantXING		{Max\_Mustermann}	% optional; links to xing.com/profile/<whatever you typed>
+	\applicantXING		{Max\_Mustermann}	% optional; verlinkt zu xing.com/profile/<whatever you typed>
 	
 	\applicantPicture	{examplePic.png}
 	\applicantSign		{exampleSign.png}
@@ -37,10 +37,10 @@
 \begin{document}
 
 % 
-% Das Anschreiben
+% Das Anschreiben (optional)
 % 
-\begin{correspondence}{Bewerbung als Patroneur}
-	\opening{Sehr geehrter Herr Personaler,}
+\begin{correspondence}{Bewerbung als Patroneur}		% Betreffzeile
+	\opening{Sehr geehrter Herr Personaler,}	% Anrede
 
 	Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
 	et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
@@ -54,7 +54,19 @@
 \end{correspondence}
 
 % 
-% Der Lebenslauf
+% Motivationsschreiben (optional; manchmal für Bewerbungen auf Studienplätze und Praktika gefordert). Die Umgebung kann
+% beliebig verschoben werden, zB hinter den Lebenslauf.
+%
+\begin{motivation}
+	Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+	consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+	sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+	takimata sanctus est Lorem ipsum dolor sit amet.
+\end{motivation}
+
+
+% 
+% Der Lebenslauf (optional)
 % 
 \begin{curriculumvitae}
 	\begin{cvsection}{Schulbildung}
@@ -69,7 +81,7 @@
 \end{curriculumvitae}
 
 % 
-% Anhänge
+% Anhänge (optional)
 % 
 \appendixFolder{./appendix}
 \append{example}

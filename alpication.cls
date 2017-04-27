@@ -52,6 +52,7 @@
 	\newcommand{\Lborn}{Born on}
 	\newcommand{\Lin}{in}
 	\newcommand{\Lthe}{}
+	\newcommand{\Lmotivation}{Motivation}
 	
 	% german
 	\DeclareOption{german}{
@@ -62,6 +63,7 @@
 		\renewcommand{\Lborn}{Geb. am}
 		\renewcommand{\Lin}{in}
 		\renewcommand{\Lthe}{den}
+		\renewcommand{\Lmotivation}{Motivationsschreiben}
 	}
 	
 	% To implement your own language, specify here as seen for german
@@ -181,6 +183,25 @@
 	\newcommand{\opening}[1]{#1\vspace{4mm}}
 	\newcommand{\closing}[1]{\vspace{4mm}#1}
 	
+% 
+% motivation environment (may be relevant for university and internship applications)
+% 
+	\newenvironment{motivation}
+	% on begin
+	{
+		
+		\lhead{\Lpage~\thepage}
+		
+		\textbf{\Large\sffamily\Lmotivation}
+		
+		\vspace{8mm}
+		
+	}
+	% on end
+	{
+		\pagebreak
+	}
+	
 %
 % curriculum vitae section environment
 %
@@ -236,6 +257,7 @@
 		\date{\Lthe~\today}
 		
 		\end{cv}
+		\pagebreak
 		
 	}
 
