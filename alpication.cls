@@ -22,7 +22,7 @@
 % 
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{alpication}[2017/04/25 Alpication]
+\ProvidesClass{alpication}[2017/04/27 Alpication]
 
 \newwrite\apxList % temporary file for appendix list
 
