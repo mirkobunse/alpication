@@ -41,6 +41,11 @@
 	\RequirePackage[hidelinks]{hyperref}
 	\RequirePackage{pdfpages}
 	\RequirePackage{enumitem}
+	\RequirePackage[letterspace=33]{microtype}
+	\RequirePackage{tikz}
+	
+	
+	\newcommand{\headingstyle}{\lsstyle\fontdimen2\font=.33em} % increases spacing between letters and words
 
 %
 % internationalization
@@ -118,13 +123,16 @@
 		% pagestyle, head and foot
 		\pagestyle{fancy}
 
-		\renewcommand{\headheight}{22.0pt}
-		\renewcommand{\headrulewidth}{0.4pt}
+		\renewcommand{\headheight}{24.0pt}
+		\renewcommand{\headrulewidth}{0.5pt}
+		\renewcommand{\headrule}{\vspace*{-5pt}\hbox to\headwidth{\color{black!80}\leaders\hrule height \headrulewidth\hfill}}
+		\setlength{\headsep}{35pt}
 
 		\lhead{}
-		\rhead{\LARGE \scshape \aName}
+		\rhead{\LARGE\rmfamily\scshape\aName}
 
-		\renewcommand{\footrulewidth}{0.4pt}
+		\renewcommand{\footrulewidth}{0.5pt}
+		\renewcommand{\footrule}{\hbox to\headwidth{\color{black!80}\leaders\hrule height \footrulewidth\hfill}\vspace*{2pt}}
 
 		\lfoot{\small\sffamily\aName}
 		\cfoot{\small\sffamily\aStreet~\\\aCity}
@@ -169,7 +177,7 @@
 		
 		% the correspondence
 	
-		\textbf{\large\sffamily#1}		% the subject
+		\textbf{\large\sffamily\headingstyle#1}		% the subject
 
 		\vspace{8mm}
 		
@@ -247,15 +255,19 @@
 		
 		\ifthenelse{\equal{\aPicture}{}}{}
 		{ % only print picture, if actually defined
-		\begin{wrapfigure}[0]{r}{40mm}
-			\fbox{
-			    \includegraphics[width=35mm]{\aPicture}
-			}
-		\end{wrapfigure}
-		}
+                 \begin{wrapfigure}[0]{R}{39mm}
+                   \begin{tikzpicture}
+                     \draw[black] (-19mm,-28mm) rectangle (19mm,28mm);
+                    \node[] at (0,0) {\includegraphics[width=35mm]{\aPicture}};
+                  \end{tikzpicture}
+                 \end{wrapfigure}
+                }
+
 		
 		% curricum vitae
 		
+		\renewcommand*{\cvheadingfont}{\Large\bfseries\headingstyle}
+		\renewcommand*{\cvlistheadingfont}{\bfseries\headingstyle} % not large (which is the default)
 		\begin{cv}{\Lcurrvitae}
 		
 		\setlength{\cvlabelwidth}{32mm}
