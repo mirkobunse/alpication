@@ -125,18 +125,18 @@
 
 		\renewcommand{\headheight}{24.0pt}
 		\renewcommand{\headrulewidth}{0.5pt}
-		\renewcommand{\headrule}{\vspace*{-5pt}\hbox to\headwidth{\color{black!80}\leaders\hrule height \headrulewidth\hfill}}
-		\setlength{\headsep}{35pt}
+		\renewcommand{\headrule}{\vspace*{-5pt}\hbox to\headwidth{\color{black!90}\leaders\hrule height \headrulewidth\hfill}}
+		\setlength{\headsep}{30pt}
 
 		\lhead{}
-		\rhead{\LARGE\rmfamily\scshape\aName}
+		\rhead{\LARGE\rmfamily\scshape\color{black!90}\aName}
 
 		\renewcommand{\footrulewidth}{0.5pt}
-		\renewcommand{\footrule}{\hbox to\headwidth{\color{black!80}\leaders\hrule height \footrulewidth\hfill}\vspace*{2pt}}
+		\renewcommand{\footrule}{\hbox to\headwidth{\color{black!90}\leaders\hrule height \footrulewidth\hfill}\vspace*{-2pt}}
 
-		\lfoot{\small\sffamily\aName}
-		\cfoot{\small\sffamily\aStreet~\\\aCity}
-		\rfoot{\small\sffamily\aPhone~\\\href{mailto:\aMail}{\texttt{\aMail}}}
+		\lfoot{\small\sffamily\color{black!90}\aName}
+		\cfoot{\small\sffamily\color{black!90}\aStreet~\\\aCity}
+		\rfoot{\small\sffamily\color{black!90}\aPhone~\\\href{mailto:\aMail}{\texttt{\aMail}}}
 		
 	}
 	
@@ -219,7 +219,7 @@
 	% on begin
 	{
 		
-		\lhead{\Lpage~\thepage}
+		\lhead{\color{black!90}\Lpage~\thepage}
 		
 		\textbf{\Large\sffamily\Lmotivation}
 		
@@ -238,6 +238,8 @@
 	% on begin
 	{
 		\begin{cvlist}{#1}
+		\setlength{\baselineskip}{1.25em}
+		\setlength{\itemsep}{0.25em}
 	}
 	% on end
 	{
@@ -251,13 +253,14 @@
 	% on begin
 	{
 		
-		\lhead{\Lpage~\thepage}
+		\lhead{\color{black!90}\Lpage~\thepage}
 		
-		\ifthenelse{\equal{\aPicture}{}}{}
-		{ % only print picture, if actually defined
+		
+		% applicant picture (only if set)
+		\ifthenelse{\equal{\aPicture}{}}{}{% 
                  \begin{wrapfigure}[0]{R}{39mm}
                    \begin{tikzpicture}
-                     \draw[black] (-19mm,-28mm) rectangle (19mm,28mm);
+                     \draw[black!90, line width=.5pt] (-19mm,-28mm) rectangle (19mm,28mm);
                     \node[] at (0,0) {\includegraphics[width=35mm]{\aPicture}};
                   \end{tikzpicture}
                  \end{wrapfigure}
@@ -265,23 +268,22 @@
 
 		
 		% curricum vitae
-		
 		\renewcommand*{\cvheadingfont}{\Large\bfseries\headingstyle}
 		\renewcommand*{\cvlistheadingfont}{\bfseries\headingstyle} % not large (which is the default)
-		\begin{cv}{\Lcurrvitae}
-		
 		\setlength{\cvlabelwidth}{32mm}
+		\begin{cv}{\Lcurrvitae}
+		\vspace*{.2em}
 	
-			\begin{cvsection}{\Lpersinfo}	% personal information
-				\item \aName\\
-				      \aStreet\\
-				      \aCity
-				\item \Ltelephone: \aPhone\\
-				      \Lmail: \href{mailto:\aMail}{\texttt{\aMail}}
-				      \ifthenelse{\equal{\aXING}{}}{}{\\\href{https://www.xing.com/profile/\aXING}{\texttt{xing.com/profile/\aXING}}}
-				\item \Lborn~\aBirthday\, \Lin~\aBirthplace\\
-				      \aFamilyStatus, \aNationality
-			\end{cvsection}
+		\begin{cvsection}{\Lpersinfo}	% personal information
+			\item \aName\\
+			      \aStreet\\
+			      \aCity
+			\item \Ltelephone: \aPhone\\
+			      \Lmail: \href{mailto:\aMail}{\texttt{\aMail}}
+			      \ifthenelse{\equal{\aXING}{}}{}{\\\href{https://www.xing.com/profile/\aXING}{\texttt{xing.com/profile/\aXING}}}
+			\item \Lborn~\aBirthday\, \Lin~\aBirthplace\\
+			      \aFamilyStatus, \aNationality
+		\end{cvsection}
 	}
 	% on end
 	{
