@@ -111,6 +111,9 @@
 %
 % beginning and end of document
 %
+	\colorlet{rulecolor}{black!90}
+	\newlength{\rulewidth}
+	\setlength{\rulewidth}{.5pt}
 	\AtBeginDocument{
 		
 		% open appendix list writer
@@ -126,15 +129,15 @@
 		\pagestyle{fancy}
 
 		\renewcommand{\headheight}{24.0pt}
-		\renewcommand{\headrulewidth}{0.5pt}
-		\renewcommand{\headrule}{\vspace*{-5pt}\hbox to\headwidth{\color{black!90}\leaders\hrule height \headrulewidth\hfill}}
+		\renewcommand{\headrulewidth}{\rulewidth}
+		\renewcommand{\headrule}{\vspace*{-5pt}\hbox to\headwidth{\color{rulecolor}\leaders\hrule height \headrulewidth\hfill}}
 		\setlength{\headsep}{30pt}
 
 		\lhead{}
 		\rhead{\LARGE\rmfamily\scshape\color{black!90}\aName}
 
-		\renewcommand{\footrulewidth}{0.5pt}
-		\renewcommand{\footrule}{\hbox to\headwidth{\color{black!90}\leaders\hrule height \footrulewidth\hfill}\vspace*{-2pt}}
+		\renewcommand{\footrulewidth}{\rulewidth}
+		\renewcommand{\footrule}{\hbox to\headwidth{\color{rulecolor}\leaders\hrule height \footrulewidth\hfill}\vspace*{-2pt}}
 
 		\lfoot{\small\sffamily\color{black!90}\aName}
 		\cfoot{\small\sffamily\color{black!90}\aStreet~\\\aCity}
@@ -262,7 +265,7 @@
 		\ifthenelse{\equal{\aPicture}{}}{}{% 
                  \begin{wrapfigure}[0]{R}{39mm}
                    \begin{tikzpicture}
-                     \draw[black!90, line width=.5pt] (-19mm,-28mm) rectangle (19mm,28mm);
+                     \draw[rulecolor, line width=\rulewidth] (-19mm,-28mm) rectangle (19mm,28mm);
                     \node[] at (0,0) {\includegraphics[width=35mm]{\aPicture}};
                   \end{tikzpicture}
                  \end{wrapfigure}
