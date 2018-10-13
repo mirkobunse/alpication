@@ -1,6 +1,6 @@
 % 
 % Alpication
-% Copyright 2014, 2017 Mirko Bunse
+% Copyright 2014, 2017-2018 Mirko Bunse
 % 
 % 
 % Do your job application easily with Alpication: Just set the needed parameters and fill the (two) provided
@@ -22,7 +22,7 @@
 % 
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{alpication}[2018/02/01 Alpication]
+\ProvidesClass{alpication}[2018/10/13 Alpication]
 
 \newwrite\apxList % temporary file for appendix list
 
@@ -265,8 +265,7 @@
 		\ifthenelse{\equal{\aPicture}{}}{}{% 
                  \begin{wrapfigure}[0]{R}{39mm}
                    \begin{tikzpicture}
-                     \draw[rulecolor, line width=\rulewidth] (-19mm,-28mm) rectangle (19mm,28mm);
-                    \node[] at (0,0) {\includegraphics[width=35mm]{\aPicture}};
+                    \node[draw=rulecolor, rectangle, line width=\rulewidth, inner sep=2mm] at (0,0) {\includegraphics[width=35mm]{\aPicture}};
                   \end{tikzpicture}
                  \end{wrapfigure}
                 }
