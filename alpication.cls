@@ -88,6 +88,10 @@
 	\newcommand{\toAddr}{}
 	\newcommand{\aXING}{}
 	\newcommand{\aGitHub}{}
+	\newcommand{\aBirthday}{}
+	\newcommand{\aBirthplace}{}
+	\newcommand{\aFamilyStatus}{}
+	\newcommand{\aNationality}{}
 	
 	\newcommand{\applicantName}[1]{\newcommand{\aName}{#1}}
 	\newcommand{\applicantStreet}[1]{\newcommand{\aStreet}{#1}}
@@ -97,14 +101,16 @@
 	\newcommand{\applicantXING}[1]{\renewcommand{\aXING}{#1}}
 	\newcommand{\applicantGitHub}[1]{\renewcommand{\aGitHub}{#1}}
 	
+	\newcommand{\applicantPosition}[1]{\newcommand{\aPosition}{#1}}
+	
 	\newcommand{\applicantPicture}[1]{\renewcommand{\aPicture}{#1}}
 	\newcommand{\applicantSign}[1]{\renewcommand{\aSign}{#1}}
 	\newcommand{\signCity}[1]{\newcommand{\sCity}{#1}}
 	
-	\newcommand{\applicantBirthday}[1]{\newcommand{\aBirthday}{#1}}
-	\newcommand{\applicantBirthplace}[1]{\newcommand{\aBirthplace}{#1}}
-	\newcommand{\applicantFamilyStatus}[1]{\newcommand{\aFamilyStatus}{#1}}
-	\newcommand{\applicantNationality}[1]{\newcommand{\aNationality}{#1}}
+	\newcommand{\applicantBirthday}[1]{\renewcommand{\aBirthday}{#1}}
+	\newcommand{\applicantBirthplace}[1]{\renewcommand{\aBirthplace}{#1}}
+	\newcommand{\applicantFamilyStatus}[1]{\renewcommand{\aFamilyStatus}{#1}}
+	\newcommand{\applicantNationality}[1]{\renewcommand{\aNationality}{#1}}
 	
 	\newcommand{\toAddress}[1]{\renewcommand{\toAddr}{#1}}
 	
@@ -128,15 +134,14 @@
 		
 		% pagestyle, head and foot
 		\pagestyle{fancy}
-
-		\renewcommand{\headheight}{24.0pt}
+		\setlength{\headheight}{24pt}
+		\setlength{\headsep}{28pt}
 		\renewcommand{\headrulewidth}{\rulewidth}
 		\renewcommand{\headrule}{\vspace*{-5pt}\hbox to\headwidth{\color{rulecolor}\leaders\hrule height \headrulewidth\hfill}}
-		\setlength{\headsep}{30pt}
-
+		
 		\lhead{}
-		\rhead{\LARGE\rmfamily\scshape\color{lightblack}\aName}
-
+		\rhead{\Large\color{lightblack}\aName}
+		
 		\renewcommand{\footrulewidth}{\rulewidth}
 		\renewcommand{\footrule}{\hbox to\headwidth{\color{rulecolor}\leaders\hrule height \footrulewidth\hfill}\vspace*{-2pt}}
 
@@ -276,8 +281,10 @@
 		\renewcommand*{\cvheadingfont}{\Large\bfseries\headingstyle}
 		\renewcommand*{\cvlistheadingfont}{\bfseries\headingstyle} % not large (which is the default)
 		\setlength{\cvlabelwidth}{32mm}
-		\begin{cv}{\Lcurrvitae}
-		\vspace*{.2em}
+		\begin{cv}{\aName}
+		\vspace*{-.33em}
+		\aPosition
+		\vspace*{.33em}
 	
 		\begin{cvsection}{\Lpersinfo}	% personal information
 			\item \aName\\
@@ -287,8 +294,12 @@
 			      \Lmail: \href{mailto:\aMail}{\texttt{\aMail}}
 			      \ifthenelse{\equal{\aXING}{}}{}{\par\href{https://www.xing.com/profile/\aXING}{\texttt{xing.com/profile/\aXING}}}
 			      \ifthenelse{\equal{\aGitHub}{}}{}{\\\href{https://github.com/\aGitHub}{\texttt{github.com/\aGitHub}}}
-			\item \Lborn~\aBirthday\, \Lin~\aBirthplace\\
-			      \aFamilyStatus, \aNationality
+			\ifthenelse{\equal{\aBirthday}{} \OR \equal{\aBirthplace}{}}{}{%
+			  \item \Lborn~\aBirthday\, \Lin~\aBirthplace
+				\ifthenelse{\equal{\aFamilyStatus}{} \OR \equal{\aNationality}{}}{}{%
+			          \\\aFamilyStatus, \aNationality
+				}
+			}
 		\end{cvsection}
 	}
 	% on end
