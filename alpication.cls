@@ -111,7 +111,8 @@
 %
 % beginning and end of document
 %
-	\colorlet{rulecolor}{black!90}
+	\colorlet{lightblack}{black!90}
+	\colorlet{rulecolor}{lightblack} % default
 	\newlength{\rulewidth}
 	\setlength{\rulewidth}{.5pt}
 	\AtBeginDocument{
@@ -134,14 +135,14 @@
 		\setlength{\headsep}{30pt}
 
 		\lhead{}
-		\rhead{\LARGE\rmfamily\scshape\color{black!90}\aName}
+		\rhead{\LARGE\rmfamily\scshape\color{lightblack}\aName}
 
 		\renewcommand{\footrulewidth}{\rulewidth}
 		\renewcommand{\footrule}{\hbox to\headwidth{\color{rulecolor}\leaders\hrule height \footrulewidth\hfill}\vspace*{-2pt}}
 
-		\lfoot{\small\sffamily\color{black!90}\aName}
-		\cfoot{\small\sffamily\color{black!90}\aStreet~\\\aCity}
-		\rfoot{\small\sffamily\color{black!90}\aPhone~\\\href{mailto:\aMail}{\texttt{\aMail}}}
+		\lfoot{\small\sffamily\color{lightblack}\aName}
+		\cfoot{\small\sffamily\color{lightblack}\aStreet~\\\aCity}
+		\rfoot{\small\sffamily\color{lightblack}\aPhone~\\\href{mailto:\aMail}{\texttt{\aMail}}}
 		
 	}
 	
@@ -224,7 +225,7 @@
 	% on begin
 	{
 		
-		\lhead{\color{black!90}\Lpage~\thepage}
+		\lhead{\color{lightblack}\Lpage~\thepage}
 		
 		\textbf{\Large\sffamily\Lmotivation}
 		
@@ -258,7 +259,7 @@
 	% on begin
 	{
 		
-		\lhead{\color{black!90}\Lpage~\thepage}
+		\lhead{\color{lightblack}\Lpage~\thepage}
 		
 		
 		% applicant picture (only if set)
