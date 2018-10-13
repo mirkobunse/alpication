@@ -41,12 +41,9 @@
 	\RequirePackage[hidelinks]{hyperref}
 	\RequirePackage{pdfpages}
 	\RequirePackage{enumitem}
-	\RequirePackage[letterspace=33]{microtype}
 	\RequirePackage{tikz}
 	
 	
-	\newcommand{\headingstyle}{\lsstyle\fontdimen2\font=.33em} % increases spacing between letters and words
-
 %
 % internationalization
 %
@@ -188,7 +185,7 @@
 		
 		% the correspondence
 	
-		\textbf{\large\sffamily\headingstyle#1}		% the subject
+		\textbf{\large#1}		% the subject
 
 		\vspace{8mm}
 		
@@ -232,7 +229,7 @@
 		
 		\lhead{\color{lightblack}\Lpage~\thepage}
 		
-		\textbf{\Large\sffamily\Lmotivation}
+		\textbf{\Large\Lmotivation}
 		
 		\vspace{8mm}
 		
@@ -278,8 +275,8 @@
 
 		
 		% curricum vitae
-		\renewcommand*{\cvheadingfont}{\Large\bfseries\headingstyle}
-		\renewcommand*{\cvlistheadingfont}{\bfseries\headingstyle} % not large (which is the default)
+		\renewcommand*{\cvheadingfont}{\Large\bfseries}
+		\renewcommand*{\cvlistheadingfont}{\bfseries} % not large (which is the default)
 		\setlength{\cvlabelwidth}{32mm}
 		\begin{cv}{\aName}
 		\vspace*{-.33em}
