@@ -118,6 +118,8 @@
 	\colorlet{rulecolor}{lightblack} % default
 	\newlength{\rulewidth}
 	\setlength{\rulewidth}{.5pt}
+	\newcommand{\cunderline}[2]{\textcolor{#1}{ \underline{\textcolor{black}{#2}} }}
+			
 	\AtBeginDocument{
 		
 		% open appendix list writer
@@ -170,7 +172,7 @@
 		
 		\ifthenelse{\equal{\toAddr}{}}{}
 		{ % only print addresses, if actually defined
-			\underline{\footnotesize\sffamily\aName, \aStreet, \aCity}	% applicant address
+			\cunderline{rulecolor}{\footnotesize\sffamily\aName, \aStreet, \aCity}	% applicant address
 			
 			{\large\sffamily\toAddr}		% addressees address
 		}
