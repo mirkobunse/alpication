@@ -84,6 +84,7 @@
 	\newcommand{\aSign}{}
 	\newcommand{\toAddr}{}
 	\newcommand{\aXING}{}
+	\newcommand{\aLinkedIn}{}
 	\newcommand{\aGitHub}{}
 	\newcommand{\aBirthday}{}
 	\newcommand{\aBirthplace}{}
@@ -96,6 +97,7 @@
 	\newcommand{\applicantPhone}[1]{\newcommand{\aPhone}{#1}}
 	\newcommand{\applicantMail}[1]{\newcommand{\aMail}{#1}}
 	\newcommand{\applicantXING}[1]{\renewcommand{\aXING}{#1}}
+	\newcommand{\applicantLinkedIn}[1]{\renewcommand{\aLinkedIn}{#1}}
 	\newcommand{\applicantGitHub}[1]{\renewcommand{\aGitHub}{#1}}
 	
 	\newcommand{\applicantPosition}[1]{\newcommand{\aPosition}{#1}}
@@ -292,6 +294,7 @@
 			\item \Ltelephone: \aPhone\\
 			      \Lmail: \href{mailto:\aMail}{\texttt{\aMail}}
 			      \ifthenelse{\equal{\aXING}{}}{}{\par\href{https://www.xing.com/profile/\aXING}{\texttt{xing.com/profile/\aXING}}}
+			      \ifthenelse{\equal{\aLinkedIn}{}}{}{\par\href{https://www.linkedin.com/in/\aLinkedIn}{\texttt{linkedin.com/in/\aLinkedIn}}}
 			      \ifthenelse{\equal{\aGitHub}{}}{}{\\\href{https://github.com/\aGitHub}{\texttt{github.com/\aGitHub}}}
 			\ifthenelse{\equal{\aBirthday}{} \OR \equal{\aBirthplace}{}}{}{%
 			  \item \Lborn~\aBirthday\, \Lin~\aBirthplace
