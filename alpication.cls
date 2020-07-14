@@ -125,8 +125,6 @@
 	\newlength{\rulewidth}
 	\setlength{\rulewidth}{.2pt}
 	\newcommand{\cunderline}[2]{\textcolor{#1}{ \underline{\textcolor{black}{#2}} }}
-
-	\setlength{\cvlabelwidth}{32mm}
 			
 	\AtBeginDocument{
 
@@ -312,7 +310,7 @@
 		\renewcommand*{\cvheadingfont}{\color{lightblack}\fontseries{sb}\selectfont\Large}
 		\renewcommand*{\cvlistheadingfont}{\color{black!98}\fontseries{sb}\selectfont} % not large (which is the default)
 
-	\setlength{\cvlabelwidth}{32mm}
+		\setlength{\cvlabelwidth}{32mm}
 		\begin{cv}{\aName.}
 		\vspace*{-.33em}
 		\aPosition
