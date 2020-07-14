@@ -31,7 +31,7 @@
 %
 	\LoadClass[a4paper, 11pt]{article}
 
-	\RequirePackage[left=30mm,right=25mm,top=30mm,bottom=40mm]{geometry}
+	\RequirePackage[left=30mm,right=25mm,top=18mm,bottom=34mm]{geometry}
 	\RequirePackage{currvita}
 	\RequirePackage{ifthen}
 	\RequirePackage{wrapfig}
@@ -42,6 +42,10 @@
 	\RequirePackage{pdfpages}
 	\RequirePackage{enumitem}
 	\RequirePackage{tikz}
+	\RequirePackage[light, scale=0.92]{montserrat}
+	\RequirePackage{eso-pic}
+	\RequirePackage{tikz}
+	\usetikzlibrary{patterns}
 	
 	
 %
@@ -116,15 +120,38 @@
 %
 % beginning and end of document
 %
-	\colorlet{lightblack}{black!90}
+	\colorlet{lightblack}{black!95}
 	\colorlet{rulecolor}{lightblack} % default
 	\newlength{\rulewidth}
-	\setlength{\rulewidth}{.5pt}
+	\setlength{\rulewidth}{.2pt}
 	\newcommand{\cunderline}[2]{\textcolor{#1}{ \underline{\textcolor{black}{#2}} }}
 
 	\setlength{\cvlabelwidth}{32mm}
 			
 	\AtBeginDocument{
+
+		\sffamily
+
+		% background for header and footer
+		\AddToShipoutPictureBG{%
+			\begin{tikzpicture}[remember picture,overlay]
+
+				% header
+				\coordinate (header south west) at ([yshift=-19mm] current page.north west);
+				\coordinate (header south east) at ([yshift=-19mm] current page.north east);
+				\fill[blue!5, postaction={pattern=crosshatch dots, pattern color=blue!1}]
+				  (current page.north east) -- (current page.north west) -- (header south west) -- (header south east) -- cycle;
+				% \draw[thick, black!4] (header south west) -- (header south east);
+
+				% footer
+				\coordinate (footer north west) at ([yshift=21mm] current page.south west);
+				\coordinate (footer north east) at ([yshift=21mm] current page.south east);
+				\fill[blue!5, postaction={pattern=crosshatch dots, pattern color=blue!1}]
+				  (footer north east) -- (footer north west) -- (current page.south west) -- (current page.south east) -- cycle;
+				% \draw[thick, black!4] (footer north west) -- (footer north east);
+
+			\end{tikzpicture}%
+		}
 		
 		% open appendix list writer
 		\openout\apxList=\jobname.apx	% not opening immediately allows to input the file to produce a list
@@ -138,19 +165,20 @@
 		% pagestyle, head and foot
 		\pagestyle{fancy}
 		\setlength{\headheight}{24pt}
-		\setlength{\headsep}{28pt}
-		\renewcommand{\headrulewidth}{\rulewidth}
-		\renewcommand{\headrule}{\vspace*{-5pt}\hbox to\headwidth{\color{rulecolor}\leaders\hrule height \headrulewidth\hfill}}
+		\setlength{\headsep}{36pt}
+		% \renewcommand{\headrulewidth}{\rulewidth}
+		% \renewcommand{\headrule}{\vspace*{-5pt}\hbox to\headwidth{\color{rulecolor}\leaders\hrule height \headrulewidth\hfill}}
+		\renewcommand{\headrule}{}
 		
 		\lhead{}
-		\rhead{\Large\color{lightblack}\aName}
+		\rhead{\sffamily\fontseries{el}\selectfont\Large\color{lightblack}\aName}
 		
-		\renewcommand{\footrulewidth}{\rulewidth}
-		\renewcommand{\footrule}{\hbox to\headwidth{\color{rulecolor}\leaders\hrule height \footrulewidth\hfill}\vspace*{-2pt}}
+		% \renewcommand{\footrulewidth}{\rulewidth}
+		% \renewcommand{\footrule}{\hbox to\headwidth{\color{rulecolor}\leaders\hrule height \footrulewidth\hfill}\vspace*{-2pt}}
 
-		\lfoot{\small\sffamily\color{lightblack}\aName}
-		\cfoot{\small\sffamily\color{lightblack}\aStreet~\\\aCity}
-		\rfoot{\small\sffamily\color{lightblack}\aPhone~\\\href{mailto:\aMail}{\texttt{\aMail}}}
+		\lfoot{\sffamily\fontseries{el}\selectfont\small\color{lightblack}\aName}
+		\cfoot{\sffamily\fontseries{el}\selectfont\small\color{lightblack}\aStreet~\\\aCity}
+		\rfoot{\sffamily\fontseries{el}\selectfont\small\color{lightblack}\aPhone~\\\href{mailto:\aMail}{\aMail}}
 		
 	}
 	
@@ -176,9 +204,9 @@
 		
 		\ifthenelse{\equal{\toAddr}{}}{}
 		{ % only print addresses, if actually defined
-			\cunderline{rulecolor}{\footnotesize\sffamily\aName, \aStreet, \aCity}	% applicant address
+			\cunderline{rulecolor}{\footnotesize\aName, \aStreet, \aCity}	% applicant address
 			
-			{\large\sffamily\toAddr}		% addressees address
+			{\toAddr}		% addressees address
 		}
 	
 		\vspace{8mm}
@@ -191,9 +219,9 @@
 		
 		% the correspondence
 	
-		\textbf{\large#1}		% the subject
+		{\color{lightblack}\fontseries{sb}\selectfont\large#1}		% the subject
 
-		\vspace{8mm}
+		% \vspace{8mm}
 		
 	}
 	% on end
@@ -233,11 +261,11 @@
 	% on begin
 	{
 		
-		\lhead{\color{lightblack}\Lpage~\thepage}
+		\lhead{\sffamily\fontseries{el}\selectfont\color{lightblack}\Lpage~\thepage}
 		
-		\textbf{\Large\Lmotivation}
+		{\color{lightblack}\fontseries{sb}\selectfont\Large\Lmotivation.} % \Large
 		
-		\vspace{8mm}
+		% \vspace{8mm}
 		
 	}
 	% on end
@@ -267,7 +295,7 @@
 	% on begin
 	{
 		
-		\lhead{\color{lightblack}\Lpage~\thepage}
+		\lhead{\sffamily\fontseries{el}\selectfont\color{lightblack}\Lpage~\thepage}
 		
 		
 		% applicant picture (only if set)
@@ -281,14 +309,16 @@
 
 		
 		% curricum vitae
-		\renewcommand*{\cvheadingfont}{\Large\bfseries}
-		\renewcommand*{\cvlistheadingfont}{\bfseries} % not large (which is the default)
-		\begin{cv}{\aName}
+		\renewcommand*{\cvheadingfont}{\color{lightblack}\fontseries{sb}\selectfont\Large}
+		\renewcommand*{\cvlistheadingfont}{\color{black!98}\fontseries{sb}\selectfont} % not large (which is the default)
+
+	\setlength{\cvlabelwidth}{32mm}
+		\begin{cv}{\aName.}
 		\vspace*{-.33em}
 		\aPosition
 		\vspace*{.33em}
 	
-		\begin{cvsection}{\Lpersinfo}	% personal information
+		\begin{cvsection}{\Lpersinfo.}	% personal information
 			\item \aName\\
 			      \aStreet\\
 			      \aCity
