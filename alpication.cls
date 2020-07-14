@@ -354,6 +354,7 @@
 	
 	\newcommand{\append}[2]{%
 	  \immediate\write\apxList{\noexpand\item \string\hyperlink{apxRefCounter\theapxRefCounter.1}{#1}} % append name to file
+	  \ClearShipoutPicture % remove background (header and footer boxes)
 	  \includepdf[pages=-,link,linkname={apxRefCounter\theapxRefCounter}]{\apxFolder/#2}
 	  \refstepcounter{apxRefCounter}
 	}
