@@ -121,6 +121,8 @@
 	\newlength{\rulewidth}
 	\setlength{\rulewidth}{.5pt}
 	\newcommand{\cunderline}[2]{\textcolor{#1}{ \underline{\textcolor{black}{#2}} }}
+
+	\setlength{\cvlabelwidth}{32mm}
 			
 	\AtBeginDocument{
 		
@@ -281,7 +283,6 @@
 		% curricum vitae
 		\renewcommand*{\cvheadingfont}{\Large\bfseries}
 		\renewcommand*{\cvlistheadingfont}{\bfseries} % not large (which is the default)
-		\setlength{\cvlabelwidth}{32mm}
 		\begin{cv}{\aName}
 		\vspace*{-.33em}
 		\aPosition
