@@ -44,9 +44,9 @@
 	\RequirePackage{tikz}
 	\RequirePackage[light, scale=0.92]{montserrat}
 	\RequirePackage{eso-pic}
-	\RequirePackage{tikz}
+	\RequirePackage{marvosym}
+
 	\usetikzlibrary{patterns}
-	
 	
 %
 % internationalization
@@ -137,17 +137,18 @@
 				% header
 				\coordinate (header south west) at ([yshift=-19mm] current page.north west);
 				\coordinate (header south east) at ([yshift=-19mm] current page.north east);
-				\fill[blue!5, postaction={pattern=crosshatch dots, pattern color=blue!1}]
+				\fill[blue!5, postaction={pattern=north west lines, pattern color=blue!1}]
 				  (current page.north east) -- (current page.north west) -- (header south west) -- (header south east) -- cycle;
 				% \draw[thick, black!4] (header south west) -- (header south east);
 
 				% footer
 				\coordinate (footer north west) at ([yshift=21mm] current page.south west);
 				\coordinate (footer north east) at ([yshift=21mm] current page.south east);
-				\fill[blue!5, postaction={pattern=crosshatch dots, pattern color=blue!1}]
+				\fill[blue!5, postaction={pattern=north west lines, pattern color=blue!1}]
 				  (footer north east) -- (footer north west) -- (current page.south west) -- (current page.south east) -- cycle;
 				% \draw[thick, black!4] (footer north west) -- (footer north east);
 
+		
 			\end{tikzpicture}%
 		}
 		
@@ -293,53 +294,138 @@
 	% on begin
 	{
 		
-		\lhead{\sffamily\fontseries{el}\selectfont\color{lightblack}\Lpage~\thepage}
-		
-		
-		% applicant picture (only if set)
-		\ifthenelse{\equal{\aPicture}{}}{}{% 
-                 \begin{wrapfigure}[0]{R}{39mm}
-                   \begin{tikzpicture}
-                    \node[draw=rulecolor, rectangle, line width=\rulewidth, inner sep=2mm] at (0,0) {\includegraphics[width=35mm]{\aPicture}};
-                  \end{tikzpicture}
-                 \end{wrapfigure}
-                }
+		\newgeometry{margin=0pt}
+		\fancyhf{} % clear all header and footers
+		\ClearShipoutPicture % remove background (header and footer boxes)
+		% \lhead{}
+		% \rhead{\sffamily\fontseries{el}\selectfont\color{lightblack}\Lpage~\thepage}
 
-		
-		% curricum vitae
-		\renewcommand*{\cvheadingfont}{\color{lightblack}\fontseries{sb}\selectfont\Large}
-		\renewcommand*{\cvlistheadingfont}{\color{black!98}\fontseries{sb}\selectfont} % not large (which is the default)
+		\begin{tikzpicture}
+			\tikzstyle{leftcol} = [
+			  text width=.25\paperwidth,
+			  anchor=north west,
+			  inner sep=12mm
+			]
+			\node[
+			  leftcol,
+			  fill=blue!5,
+			  postaction={pattern=north west lines, pattern color=blue!1},
+			  rectangle,
+			  text depth=\pdfpageheight-25mm,
+			  minimum height=\pdfpageheight
+			] (leftcol fill) at (current page.north west) {}; % just the fill
+			
+			% applicant picture (only if set)
+			\ifthenelse{\equal{\aPicture}{}}{%
+				\coordinate (leftcol top) at (leftcol.north);
+			}{% else, i.e. \aPicture is not empty
+				\node[
+				  fill=white,
+				  anchor=north west,
+				  rectangle,
+				  line width=\rulewidth,
+				  inner sep=2mm,
+				  outer sep=0mm,
+				  rounded corners
+				] (applicant picture) at ([yshift=-13mm, xshift=12mm]leftcol fill.north west)
+				{\includegraphics[width=.2\paperwidth]{\aPicture}};
+				\coordinate (leftcol top) at (applicant picture.south);
+	        }
 
-		\setlength{\cvlabelwidth}{32mm}
-		\begin{cv}{\aName.}
-		\vspace*{-.33em}
-		\aPosition
-		\vspace*{.33em}
-	
-		\begin{cvsection}{\Lpersinfo.}	% personal information
-			\item \aName\\
-			      \aStreet\\
-			      \aCity
-			\item \Ltelephone: \aPhone\\
-			      \Lmail: \href{mailto:\aMail}{\texttt{\aMail}}
-			      \ifthenelse{\equal{\aXING}{}}{}{\par\href{https://www.xing.com/profile/\aXING}{\texttt{xing.com/profile/\aXING}}}
-			      \ifthenelse{\equal{\aLinkedIn}{}}{}{\par\href{https://www.linkedin.com/in/\aLinkedIn}{\texttt{linkedin.com/in/\aLinkedIn}}}
-			      \ifthenelse{\equal{\aGitHub}{}}{}{\\\href{https://github.com/\aGitHub}{\texttt{github.com/\aGitHub}}}
-			\ifthenelse{\equal{\aBirthday}{} \OR \equal{\aBirthplace}{}}{}{%
-			  \item \Lborn~\aBirthday\, \Lin~\aBirthplace
-				\ifthenelse{\equal{\aFamilyStatus}{} \OR \equal{\aNationality}{}}{}{%
-			          \\\aFamilyStatus, \aNationality
-				}
-			}
-		\end{cvsection}
+			\node[leftcol, inner ysep=8mm] at (leftcol top-|current page.north west) {%
+				\fontsize{12pt}{21pt}\selectfont
+				{\sffamily\color{lightblack}\fontseries{sb}\selectfont\huge\raggedleft\aName.}\par
+				{\sffamily\LARGE\aPosition}\par
+				\vspace{8mm}
+				{\sffamily\color{lightblack}\fontseries{sb}\selectfont\Large Schl\"usselkompetenzen.}
+				\begin{itemize}[topsep=0pt, itemsep=-9pt, itemindent=-12pt]
+					\item \vspace{-2pt} Gewebe
+					\item Textilien
+					\item Muster
+				\end{itemize}\par
+				\vspace{8mm}
+				{\sffamily\color{lightblack}\fontseries{sb}\selectfont\Large Referenzen.}
+				\begin{itemize}[topsep=0pt, itemsep=-9pt, itemindent=-12pt]
+					\item \vspace{-2pt} Mutter Theresa
+					\item Helmut Kohl
+				\end{itemize}\par
+				\vspace{8mm}
+				{\sffamily\color{lightblack}\fontseries{sb}\selectfont\Large Sprachen.}
+				\begin{itemize}[topsep=0pt, itemsep=-9pt, itemindent=-12pt]
+					\item \vspace{-2pt} Deutsch (Muttersprache)
+					\item English (Well well)
+				\end{itemize}\par
+				\vspace{8mm}
+				{\sffamily\color{lightblack}\fontseries{sb}\selectfont\Large Kontakt.}
+				\begin{itemize}[label={}, topsep=0pt, itemsep=-12pt, itemindent=-12pt]
+					\item \vspace{-2pt} \aStreet
+					\item \aCity \\[5mm]
+					\item \Telefon\hspace{6pt}\aPhone
+				    \item \Letter\hspace{7pt}\href{mailto:\aMail}{\texttt{\aMail}}
+				\end{itemize}\par
+				% \vspace{8mm}
+				% {\sffamily\color{lightblack}\fontseries{sb}\selectfont\Large Sonstiges.}
+				% \begin{itemize}[label={}, topsep=0pt, itemsep=-12pt, itemindent=-12pt]
+				% 	\item \vspace{-2pt} \Lborn~\aBirthday
+				% 	\item \Lin~\aBirthplace
+				% \end{itemize}\par
+			};
+
+
+
+
+
+			\node[
+			  text width=.7\paperwidth,
+			  anchor=north west,
+			  inner xsep=8mm,
+			  inner ysep=12mm
+			  % text depth=\pdfpageheight-25mm,
+			  % minimum height=\pdfpageheight
+			] (cv) at (leftcol fill.north east) {
+
+				foo
+
+				% % \begin{minipage}[t][.99\pdfpageheight]{.74\paperwidth}
+
+				% % curricum vitae
+				% \renewcommand*{\cvheadingfont}{\color{lightblack}\fontseries{sb}\selectfont\Large}
+				% \renewcommand*{\cvlistheadingfont}{\color{black!98}\fontseries{sb}\selectfont} % not large (which is the default)
+
+				% \setlength{\cvlabelwidth}{32mm}
+
+				% \begin{cvsection}{\Lpersinfo.}	% personal information
+				% 	\item \aName\\
+				% 	      \aStreet\\
+				% 	      \aCity
+				% 	\item \Ltelephone: \aPhone\\
+				% 	      \Lmail: \href{mailto:\aMail}{\texttt{\aMail}}
+				% 	      \ifthenelse{\equal{\aXING}{}}{}{\par\href{https://www.xing.com/profile/\aXING}{\texttt{xing.com/profile/\aXING}}}
+				% 	      \ifthenelse{\equal{\aLinkedIn}{}}{}{\par\href{https://www.linkedin.com/in/\aLinkedIn}{\texttt{linkedin.com/in/\aLinkedIn}}}
+				% 	      \ifthenelse{\equal{\aGitHub}{}}{}{\\\href{https://github.com/\aGitHub}{\texttt{github.com/\aGitHub}}}
+				% 	\ifthenelse{\equal{\aBirthday}{} \OR \equal{\aBirthplace}{}}{}{%
+				% 	  \item \Lborn~\aBirthday\, \Lin~\aBirthplace
+				% 		\ifthenelse{\equal{\aFamilyStatus}{} \OR \equal{\aNationality}{}}{}{%
+				% 	          \\\aFamilyStatus, \aNationality
+				% 		}
+				% 	}
+				% \end{cvsection}
+
+
+			};
+		\end{tikzpicture}
+
 	}
 	% on end
 	{
 	
 		\cvplace{\sCity}
 		\date{\Lthe~\today}
-		
-		\end{cv}
+
+		% \end{minipage}
+
+		% };
+		% \end{tikzpicture}
 		\pagebreak
 		
 	}
