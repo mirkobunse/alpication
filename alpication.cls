@@ -343,9 +343,16 @@
 		\coordinate (next left column anchor) at ([yshift=-9mm]applicant picture.south west);
 	}
 
-	\newenvironment{curriculumvitae}
-	% on begin
-	{
+
+
+	\newcommand{\populateLeftColumn}{} % to be redefined in main document
+
+	\renewcommand*{\cvlistheadingfont}{\color{black!98}\fontseries{sb}\selectfont} % not large (which is the default)
+	\newcommand{\populateRightColumn}{} % to be redefined in main document
+
+
+
+	\newcommand{\makeCV}{%
 		
 		\newgeometry{margin=0pt}
 		\fancyhf{} % clear all header and footers
@@ -373,99 +380,24 @@
 			] (leftcol fill) at (current page.north west) {}; % just the fill
 
 			\coordinate (next left column anchor) at ([yshift=-13mm, xshift=12mm]leftcol fill.north west);
-			
-			% applicant picture (only if set)
-			\ifthenelse{\equal{\aPicture}{}}{}{%
-				\leftColumnPicture
-			}
 
-			\leftColumnApplicantNameAndPosition
-
-			\begin{leftColumnItemize}{Schl\"usselkompetenzen}
-				\item Gewebe
-				\item Textilien
-				\item Muster
-			\end{leftColumnItemize}
-
-			\begin{leftColumnItemize}{Referenzen}
-				\item Mutter Theresa
-				\item Helmut Kohl
-			\end{leftColumnItemize}
-
-			\begin{leftColumnItemize}{Sprachen}
-				\item Deutsch (Muttersprache)
-				\item English (Well well)
-			\end{leftColumnItemize}
-
-			\begin{leftColumnItemize}[label={}, itemsep=-12pt]{Kontakt}
-				\item \aStreet
-				\item \aCity \\[5mm]
-				\item \Telefon\hspace{6pt}\aPhone
-			    \item \Letter\hspace{7pt}\href{mailto:\aMail}{\texttt{\aMail}}
-			\end{leftColumnItemize}
-
-			% \begin{leftColumnItemize}[label={}, itemsep=-12pt]{Sonstiges}
-			% 	\item \Lborn~\aBirthday
-			% 	\item \Lin~\aBirthplace
-			% \end{leftColumnItemize}
-
-
-
-
+			\populateLeftColumn
 
 			\node[
 			  text width=.7\paperwidth,
 			  anchor=north west,
-			  inner xsep=8mm,
-			  inner ysep=12mm
+			  inner xsep=6mm,
+			  inner ysep=9mm
 			  % text depth=\pdfpageheight-25mm,
 			  % minimum height=\pdfpageheight
 			] (cv) at (leftcol fill.north east) {
 
-				foo
-
-				% % \begin{minipage}[t][.99\pdfpageheight]{.74\paperwidth}
-
-				% % curricum vitae
-				% \renewcommand*{\cvheadingfont}{\color{lightblack}\fontseries{sb}\selectfont\Large}
-				% \renewcommand*{\cvlistheadingfont}{\color{black!98}\fontseries{sb}\selectfont} % not large (which is the default)
-
-				% \setlength{\cvlabelwidth}{32mm}
-
-				% \begin{cvsection}{\Lpersinfo.}	% personal information
-				% 	\item \aName\\
-				% 	      \aStreet\\
-				% 	      \aCity
-				% 	\item \Ltelephone: \aPhone\\
-				% 	      \Lmail: \href{mailto:\aMail}{\texttt{\aMail}}
-				% 	      \ifthenelse{\equal{\aXING}{}}{}{\par\href{https://www.xing.com/profile/\aXING}{\texttt{xing.com/profile/\aXING}}}
-				% 	      \ifthenelse{\equal{\aLinkedIn}{}}{}{\par\href{https://www.linkedin.com/in/\aLinkedIn}{\texttt{linkedin.com/in/\aLinkedIn}}}
-				% 	      \ifthenelse{\equal{\aGitHub}{}}{}{\\\href{https://github.com/\aGitHub}{\texttt{github.com/\aGitHub}}}
-				% 	\ifthenelse{\equal{\aBirthday}{} \OR \equal{\aBirthplace}{}}{}{%
-				% 	  \item \Lborn~\aBirthday\, \Lin~\aBirthplace
-				% 		\ifthenelse{\equal{\aFamilyStatus}{} \OR \equal{\aNationality}{}}{}{%
-				% 	          \\\aFamilyStatus, \aNationality
-				% 		}
-				% 	}
-				% \end{cvsection}
-
+				\setlength{\cvlabelwidth}{32mm}
+				\populateRightColumn
 
 			};
 		\end{tikzpicture}
 
-	}
-	% on end
-	{
-	
-		\cvplace{\sCity}
-		\date{\Lthe~\today}
-
-		% \end{minipage}
-
-		% };
-		% \end{tikzpicture}
-		\pagebreak
-		
 	}
 
 % 

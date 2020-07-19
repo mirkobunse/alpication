@@ -77,17 +77,54 @@
 % 
 % Der Lebenslauf (optional)
 % 
-\begin{curriculumvitae}
-	\begin{cvsection}{Schulbildung.}
+\renewcommand{\populateLeftColumn}{%
+
+	% applicant picture and name
+	\leftColumnPicture
+	\leftColumnApplicantNameAndPosition
+
+	\begin{leftColumnItemize}{Schl\"usselkompetenzen}
+		\item Gewebe
+		\item Textilien
+		\item Muster
+	\end{leftColumnItemize}
+
+	\begin{leftColumnItemize}{Referenzen}
+		\item Mutter Theresa
+		\item Helmut Kohl
+	\end{leftColumnItemize}
+
+	\begin{leftColumnItemize}{Sprachen}
+		\item Deutsch (Muttersprache)
+		\item English (Well well)
+	\end{leftColumnItemize}
+
+	\begin{leftColumnItemize}[label={}, itemsep=-12pt]{Kontakt}
+		\item \aStreet
+		\item \aCity \\[5mm]
+		\item \Telefon\hspace{6pt}\aPhone
+	    \item \Letter\hspace{7pt}\href{mailto:\aMail}{\texttt{\aMail}}
+	\end{leftColumnItemize}
+
+	% \begin{leftColumnItemize}[label={}, itemsep=-12pt]{Sonstiges}
+	% 	\item \Lborn~\aBirthday
+	% 	\item \Lin~\aBirthplace
+	% \end{leftColumnItemize}
+}
+
+\renewcommand{\populateRightColumn}{%
+	\begin{cvsection}{Schulbildung}
 		\item [04$\vert$1956 -- 05$\vert$1960] 	Muster-Grundschule Musterstadt
 		\item [07$\vert$1960 -- 05$\vert$1966] 	Städtische Realschule Musterstadt
 	\end{cvsection}
 
-	\begin{cvsection}{Ausbildung.}
-		\item [06$\vert$1966 -- 08$\vert$1969] 	Patroneursausbildung bei Stickerei Mustermacher,\\Spezialisierung auf Gewebe
+	\begin{cvsection}{Ausbildung}
+		\item [06$\vert$1966 -- 08$\vert$1969] 	Patroneursausbildung Stickerei Mustermacher,\\Spezialisierung auf Gewebe
 		\item [07$\vert$1968]			Muster-Design-Workshop
 	\end{cvsection}
-\end{curriculumvitae}
+}
+
+\makeCV % create the curriculum vitea from \populateLeftColumn and \populateRightColumn
 
 % 
 % Anhänge (optional)
