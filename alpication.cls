@@ -46,7 +46,13 @@
 	\RequirePackage{eso-pic}
 	\RequirePackage{marvosym}
 
+
+% tikz
 	\usetikzlibrary{patterns}
+	\tikzstyle{left cv column} = [
+	  fill=blue!5,
+	  postaction={pattern=north west lines, pattern color=blue!1}
+	]
 	
 %
 % internationalization
@@ -290,6 +296,27 @@
 %
 % main curriculum vitae environment
 %
+	\newcommand{\leftColumnBlock}[1]{%
+		\node[left cv column default, inner ysep=0mm]
+		  (last left column block) at (leftcol fill.west|-next left column anchor)
+		  {\fontsize{12pt}{21pt}\selectfont #1};
+		\coordinate (next left column anchor) at ([yshift=-9mm]last left column block.south west);
+	}
+
+	\newcommand{\makeApplicantPicture}{%
+		\node[
+		  fill=white,
+		  anchor=north west,
+		  rectangle,
+		  line width=\rulewidth,
+		  inner sep=2mm,
+		  outer sep=0mm,
+		  rounded corners
+		] (applicant picture) at ([xshift=12mm]leftcol fill.west|-next left column anchor)
+		{\includegraphics[width=.2\paperwidth]{\aPicture}};
+		\coordinate (next left column anchor) at ([yshift=-9mm]applicant picture.south west);
+	}
+
 	\newenvironment{curriculumvitae}
 	% on begin
 	{
@@ -299,63 +326,64 @@
 		\ClearShipoutPicture % remove background (header and footer boxes)
 		% \lhead{}
 		% \rhead{\sffamily\fontseries{el}\selectfont\color{lightblack}\Lpage~\thepage}
+		
+		\tikzstyle{left cv column default} = [
+		  text width=.25\paperwidth,
+		  anchor=north west,
+		  inner sep=12mm
+		]
+		
+		\tikzstyle{left cv column block} = [
+		  left cv column default,
+		  inner ysep=6mm
+		]
 
 		\begin{tikzpicture}
-			\tikzstyle{leftcol} = [
-			  text width=.25\paperwidth,
-			  anchor=north west,
-			  inner sep=12mm
-			]
 			\node[
-			  leftcol,
-			  fill=blue!5,
-			  postaction={pattern=north west lines, pattern color=blue!1},
-			  rectangle,
+			  left cv column default,
 			  text depth=\pdfpageheight-25mm,
-			  minimum height=\pdfpageheight
+			  minimum height=\pdfpageheight,
+			  left cv column
 			] (leftcol fill) at (current page.north west) {}; % just the fill
+
+			\coordinate (next left column anchor) at ([yshift=-13mm, xshift=12mm]leftcol fill.north west);
 			
 			% applicant picture (only if set)
-			\ifthenelse{\equal{\aPicture}{}}{%
-				\coordinate (leftcol top) at (leftcol.north);
-			}{% else, i.e. \aPicture is not empty
-				\node[
-				  fill=white,
-				  anchor=north west,
-				  rectangle,
-				  line width=\rulewidth,
-				  inner sep=2mm,
-				  outer sep=0mm,
-				  rounded corners
-				] (applicant picture) at ([yshift=-13mm, xshift=12mm]leftcol fill.north west)
-				{\includegraphics[width=.2\paperwidth]{\aPicture}};
-				\coordinate (leftcol top) at (applicant picture.south);
+			\ifthenelse{\equal{\aPicture}{}}{}{%
+				\makeApplicantPicture
 	        }
 
-			\node[leftcol, inner ysep=8mm] at (leftcol top-|current page.north west) {%
-				\fontsize{12pt}{21pt}\selectfont
+			\leftColumnBlock{%
 				{\sffamily\color{lightblack}\fontseries{sb}\selectfont\huge\raggedleft\aName.}\par
 				{\sffamily\LARGE\aPosition}\par
-				\vspace{8mm}
+			}
+
+			\leftColumnBlock{%
 				{\sffamily\color{lightblack}\fontseries{sb}\selectfont\Large Schl\"usselkompetenzen.}
 				\begin{itemize}[topsep=0pt, itemsep=-9pt, itemindent=-12pt]
 					\item \vspace{-2pt} Gewebe
 					\item Textilien
 					\item Muster
 				\end{itemize}\par
-				\vspace{8mm}
+			}
+
+			\leftColumnBlock{%
 				{\sffamily\color{lightblack}\fontseries{sb}\selectfont\Large Referenzen.}
 				\begin{itemize}[topsep=0pt, itemsep=-9pt, itemindent=-12pt]
 					\item \vspace{-2pt} Mutter Theresa
 					\item Helmut Kohl
 				\end{itemize}\par
-				\vspace{8mm}
+			}
+
+			\leftColumnBlock{%
 				{\sffamily\color{lightblack}\fontseries{sb}\selectfont\Large Sprachen.}
 				\begin{itemize}[topsep=0pt, itemsep=-9pt, itemindent=-12pt]
 					\item \vspace{-2pt} Deutsch (Muttersprache)
 					\item English (Well well)
 				\end{itemize}\par
-				\vspace{8mm}
+			}
+
+			\leftColumnBlock{%
 				{\sffamily\color{lightblack}\fontseries{sb}\selectfont\Large Kontakt.}
 				\begin{itemize}[label={}, topsep=0pt, itemsep=-12pt, itemindent=-12pt]
 					\item \vspace{-2pt} \aStreet
@@ -363,13 +391,15 @@
 					\item \Telefon\hspace{6pt}\aPhone
 				    \item \Letter\hspace{7pt}\href{mailto:\aMail}{\texttt{\aMail}}
 				\end{itemize}\par
-				% \vspace{8mm}
-				% {\sffamily\color{lightblack}\fontseries{sb}\selectfont\Large Sonstiges.}
-				% \begin{itemize}[label={}, topsep=0pt, itemsep=-12pt, itemindent=-12pt]
-				% 	\item \vspace{-2pt} \Lborn~\aBirthday
-				% 	\item \Lin~\aBirthplace
-				% \end{itemize}\par
-			};
+			}
+
+			% \leftColumnBlock{%
+			% 	{\sffamily\color{lightblack}\fontseries{sb}\selectfont\Large Sonstiges.}
+			% 	\begin{itemize}[label={}, topsep=0pt, itemsep=-12pt, itemindent=-12pt]
+			% 		\item \vspace{-2pt} \Lborn~\aBirthday
+			% 		\item \Lin~\aBirthplace
+			% 	\end{itemize}\par
+			% }
 
 
 
