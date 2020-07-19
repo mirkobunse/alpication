@@ -45,6 +45,7 @@
 	\RequirePackage[light, scale=0.92]{montserrat}
 	\RequirePackage{eso-pic}
 	\RequirePackage{marvosym}
+	\RequirePackage{xparse}
 
 
 % tikz
@@ -307,6 +308,14 @@
 		\coordinate (next left column anchor) at ([yshift=-9mm]last left column block.south west);
 	}
 
+	\NewDocumentCommand{\leftColumnItemize}{ O{} O{} m }{%
+		\leftColumnBlock[#1]{%
+			\begin{itemize}[topsep=0pt, itemsep=-9pt, itemindent=-12pt, #2]
+				#3
+			\end{itemize}\par
+		}
+	}
+
 	\newcommand{\makeApplicantPicture}{%
 		\node[
 		  fill=white,
@@ -362,35 +371,27 @@
 				{\sffamily\LARGE\aPosition}\par
 			}
 
-			\leftColumnBlock[Schl\"usselkompetenzen]{%
-				\begin{itemize}[topsep=0pt, itemsep=-9pt, itemindent=-12pt]
-					\item Gewebe
-					\item Textilien
-					\item Muster
-				\end{itemize}\par
+			\leftColumnItemize[Schl\"usselkompetenzen]{%
+				\item Gewebe
+				\item Textilien
+				\item Muster
 			}
 
-			\leftColumnBlock[Referenzen]{%
-				\begin{itemize}[topsep=0pt, itemsep=-9pt, itemindent=-12pt]
-					\item Mutter Theresa
-					\item Helmut Kohl
-				\end{itemize}\par
+			\leftColumnItemize[Referenzen]{%
+				\item Mutter Theresa
+				\item Helmut Kohl
 			}
 
-			\leftColumnBlock[Sprachen]{%
-				\begin{itemize}[topsep=0pt, itemsep=-9pt, itemindent=-12pt]
-					\item Deutsch (Muttersprache)
-					\item English (Well well)
-				\end{itemize}\par
+			\leftColumnItemize[Sprachen]{%
+				\item Deutsch (Muttersprache)
+				\item English (Well well)
 			}
 
-			\leftColumnBlock[Kontakt]{%
-				\begin{itemize}[label={}, topsep=0pt, itemsep=-12pt, itemindent=-12pt]
-					\item \aStreet
-					\item \aCity \\[5mm]
-					\item \Telefon\hspace{6pt}\aPhone
-				    \item \Letter\hspace{7pt}\href{mailto:\aMail}{\texttt{\aMail}}
-				\end{itemize}\par
+			\leftColumnItemize[Kontakt][label={}, itemsep=-12pt]{%
+				\item \aStreet
+				\item \aCity \\[5mm]
+				\item \Telefon\hspace{6pt}\aPhone
+			    \item \Letter\hspace{7pt}\href{mailto:\aMail}{\texttt{\aMail}}
 			}
 
 			% \leftColumnBlock[Sonstiges]{%
