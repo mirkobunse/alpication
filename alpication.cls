@@ -31,6 +31,7 @@
 %
 	\LoadClass[a4paper, 11pt]{article}
 
+	\RequirePackage{environ}
 	\RequirePackage[left=30mm,right=25mm,top=18mm,bottom=34mm]{geometry}
 	\RequirePackage{currvita}
 	\RequirePackage{ifthen}
@@ -297,26 +298,38 @@
 %
 % main curriculum vitae environment
 %
-	\newcommand{\leftColumnBlock}[2][]{%
+	\NewEnviron{leftColumnBlock}[1][]{%
 		\node[left cv column default, inner ysep=0mm]
 		  (last left column block) at (leftcol fill.west|-next left column anchor)
 		  {%
-		    \fontsize{12pt}{21pt}\selectfont%
-		    \ifthenelse{\equal{#1}{}}{}{\mbox{\sffamily\color{lightblack}\fontseries{sb}\selectfont\Large #1}\vspace{-2pt}}%
-		    #2
+			\fontsize{12pt}{21pt}\selectfont%
+			\ifthenelse{\equal{#1}{}}{}{\mbox{\sffamily\color{lightblack}\fontseries{sb}\selectfont\Large #1}\vspace{-2pt}}%
+			\BODY
 		  };
 		\coordinate (next left column anchor) at ([yshift=-9mm]last left column block.south west);
 	}
 
-	\NewDocumentCommand{\leftColumnItemize}{ O{} O{} m }{%
-		\leftColumnBlock[#1]{%
-			\begin{itemize}[topsep=0pt, itemsep=-9pt, itemindent=-12pt, #2]
-				#3
+	\NewEnviron{leftColumnItemize}[2][]{%
+		\node[left cv column default, inner ysep=0mm]
+		  (last left column block) at (leftcol fill.west|-next left column anchor)
+		  {%
+			\fontsize{12pt}{21pt}\selectfont%
+			\mbox{\sffamily\color{lightblack}\fontseries{sb}\selectfont\Large #2}\vspace{-2pt}%
+			\begin{itemize}[topsep=0pt, itemsep=-9pt, itemindent=-12pt, #1]
+				\BODY
 			\end{itemize}\par
-		}
+		  };
+		\coordinate (next left column anchor) at ([yshift=-9mm]last left column block.south west);
 	}
 
-	\newcommand{\makeApplicantPicture}{%
+	\newcommand{\leftColumnApplicantNameAndPosition}{%
+		\begin{leftColumnBlock}
+			{\sffamily\color{lightblack}\fontseries{sb}\selectfont\huge\raggedleft\aName}\par
+			{\sffamily\LARGE\aPosition}\par
+		\end{leftColumnBlock}
+	}
+
+	\newcommand{\leftColumnPicture}{%
 		\node[
 		  fill=white,
 		  anchor=north west,
@@ -363,43 +376,38 @@
 			
 			% applicant picture (only if set)
 			\ifthenelse{\equal{\aPicture}{}}{}{%
-				\makeApplicantPicture
-	        }
-
-			\leftColumnBlock{%
-				{\sffamily\color{lightblack}\fontseries{sb}\selectfont\huge\raggedleft\aName}\par
-				{\sffamily\LARGE\aPosition}\par
+				\leftColumnPicture
 			}
 
-			\leftColumnItemize[Schl\"usselkompetenzen]{%
+			\leftColumnApplicantNameAndPosition
+
+			\begin{leftColumnItemize}{Schl\"usselkompetenzen}
 				\item Gewebe
 				\item Textilien
 				\item Muster
-			}
+			\end{leftColumnItemize}
 
-			\leftColumnItemize[Referenzen]{%
+			\begin{leftColumnItemize}{Referenzen}
 				\item Mutter Theresa
 				\item Helmut Kohl
-			}
+			\end{leftColumnItemize}
 
-			\leftColumnItemize[Sprachen]{%
+			\begin{leftColumnItemize}{Sprachen}
 				\item Deutsch (Muttersprache)
 				\item English (Well well)
-			}
+			\end{leftColumnItemize}
 
-			\leftColumnItemize[Kontakt][label={}, itemsep=-12pt]{%
+			\begin{leftColumnItemize}[label={}, itemsep=-12pt]{Kontakt}
 				\item \aStreet
 				\item \aCity \\[5mm]
 				\item \Telefon\hspace{6pt}\aPhone
 			    \item \Letter\hspace{7pt}\href{mailto:\aMail}{\texttt{\aMail}}
-			}
+			\end{leftColumnItemize}
 
-			% \leftColumnBlock[Sonstiges]{%
-			% 	\begin{itemize}[label={}, topsep=0pt, itemsep=-12pt, itemindent=-12pt]
-			% 		\item \Lborn~\aBirthday
-			% 		\item \Lin~\aBirthplace
-			% 	\end{itemize}\par
-			% }
+			% \begin{leftColumnItemize}[label={}, itemsep=-12pt]{Sonstiges}
+			% 	\item \Lborn~\aBirthday
+			% 	\item \Lin~\aBirthplace
+			% \end{leftColumnItemize}
 
 
 
