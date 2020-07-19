@@ -296,10 +296,14 @@
 %
 % main curriculum vitae environment
 %
-	\newcommand{\leftColumnBlock}[1]{%
+	\newcommand{\leftColumnBlock}[2][]{%
 		\node[left cv column default, inner ysep=0mm]
 		  (last left column block) at (leftcol fill.west|-next left column anchor)
-		  {\fontsize{12pt}{21pt}\selectfont #1};
+		  {%
+		    \fontsize{12pt}{21pt}\selectfont%
+		    \ifthenelse{\equal{#1}{}}{}{\mbox{\sffamily\color{lightblack}\fontseries{sb}\selectfont\Large #1}\vspace{-2pt}}%
+		    #2
+		  };
 		\coordinate (next left column anchor) at ([yshift=-9mm]last left column block.south west);
 	}
 
@@ -354,49 +358,44 @@
 	        }
 
 			\leftColumnBlock{%
-				{\sffamily\color{lightblack}\fontseries{sb}\selectfont\huge\raggedleft\aName.}\par
+				{\sffamily\color{lightblack}\fontseries{sb}\selectfont\huge\raggedleft\aName}\par
 				{\sffamily\LARGE\aPosition}\par
 			}
 
-			\leftColumnBlock{%
-				{\sffamily\color{lightblack}\fontseries{sb}\selectfont\Large Schl\"usselkompetenzen.}
+			\leftColumnBlock[Schl\"usselkompetenzen]{%
 				\begin{itemize}[topsep=0pt, itemsep=-9pt, itemindent=-12pt]
-					\item \vspace{-2pt} Gewebe
+					\item Gewebe
 					\item Textilien
 					\item Muster
 				\end{itemize}\par
 			}
 
-			\leftColumnBlock{%
-				{\sffamily\color{lightblack}\fontseries{sb}\selectfont\Large Referenzen.}
+			\leftColumnBlock[Referenzen]{%
 				\begin{itemize}[topsep=0pt, itemsep=-9pt, itemindent=-12pt]
-					\item \vspace{-2pt} Mutter Theresa
+					\item Mutter Theresa
 					\item Helmut Kohl
 				\end{itemize}\par
 			}
 
-			\leftColumnBlock{%
-				{\sffamily\color{lightblack}\fontseries{sb}\selectfont\Large Sprachen.}
+			\leftColumnBlock[Sprachen]{%
 				\begin{itemize}[topsep=0pt, itemsep=-9pt, itemindent=-12pt]
-					\item \vspace{-2pt} Deutsch (Muttersprache)
+					\item Deutsch (Muttersprache)
 					\item English (Well well)
 				\end{itemize}\par
 			}
 
-			\leftColumnBlock{%
-				{\sffamily\color{lightblack}\fontseries{sb}\selectfont\Large Kontakt.}
+			\leftColumnBlock[Kontakt]{%
 				\begin{itemize}[label={}, topsep=0pt, itemsep=-12pt, itemindent=-12pt]
-					\item \vspace{-2pt} \aStreet
+					\item \aStreet
 					\item \aCity \\[5mm]
 					\item \Telefon\hspace{6pt}\aPhone
 				    \item \Letter\hspace{7pt}\href{mailto:\aMail}{\texttt{\aMail}}
 				\end{itemize}\par
 			}
 
-			% \leftColumnBlock{%
-			% 	{\sffamily\color{lightblack}\fontseries{sb}\selectfont\Large Sonstiges.}
+			% \leftColumnBlock[Sonstiges]{%
 			% 	\begin{itemize}[label={}, topsep=0pt, itemsep=-12pt, itemindent=-12pt]
-			% 		\item \vspace{-2pt} \Lborn~\aBirthday
+			% 		\item \Lborn~\aBirthday
 			% 		\item \Lin~\aBirthplace
 			% 	\end{itemize}\par
 			% }
