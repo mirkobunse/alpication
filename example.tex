@@ -16,7 +16,7 @@
 % 
 % Informationen zum Bewerber
 % 
-	\applicantName		{Max \mbox{Mustermann}}
+	\applicantName		{Max \mbox{Mustermann}} % \mbox verhindert Umbrüche im Wort
 	\applicantStreet	{Musterstraße 1b}
 	\applicantCity		{12345 Musterstadt}
 	\applicantPhone		{0123\,456\,78\,910}
@@ -35,10 +35,10 @@
 % 	\applicantFamilyStatus	{Ledig}
 % 	\applicantNationality	{Deutsch}
 	
-	\toAddress	{	Paul Personaler\\
+	\toAddress{	Paul Personaler\\
 				Muster GmbH\\
 				Musterstraße 42\\
-				12345 Musterstadt		}
+				12345 Musterstadt	}
 
 \begin{document}
 
@@ -74,14 +74,16 @@
 \end{motivation}
 
 
-% 
+%
 % Der Lebenslauf (optional)
+%
+% Nutzung: \makeCV{<linke Spalte>}{<rechte Spalte>}
 % 
-\renewcommand{\populateLeftColumn}{%
+\makeCV{%
 
-	% applicant picture and name
-	\leftColumnPicture
-	\leftColumnApplicantNameAndPosition
+	% Linke Spalte
+	\leftColumnPicture % Profilbild
+	\leftColumnApplicantNameAndPosition % Name und aktuelle Position
 
 	\begin{leftColumnItemize}{Schl\"usselkompetenzen}
 		\item Gewebe
@@ -110,9 +112,10 @@
 	% 	\item \Lborn~\aBirthday
 	% 	\item \Lin~\aBirthplace
 	% \end{leftColumnItemize}
-}
 
-\renewcommand{\populateRightColumn}{%
+}{%
+
+	% Rechte Spalte
 	\begin{cvsection}{Schulbildung}
 		\item [04$\vert$1956 -- 05$\vert$1960] 	Muster-Grundschule Musterstadt
 		\item [07$\vert$1960 -- 05$\vert$1966] 	Städtische Realschule Musterstadt
@@ -122,9 +125,9 @@
 		\item [06$\vert$1966 -- 08$\vert$1969] 	Patroneursausbildung Stickerei Mustermacher,\\Spezialisierung auf Gewebe
 		\item [07$\vert$1968]			Muster-Design-Workshop
 	\end{cvsection}
-}
 
-\makeCV % create the curriculum vitea from \populateLeftColumn and \populateRightColumn
+} % Ende von \makeCV
+
 
 % 
 % Anhänge (optional)

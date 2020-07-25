@@ -46,7 +46,6 @@
 	\RequirePackage[light, scale=0.92]{montserrat}
 	\RequirePackage{eso-pic}
 	\RequirePackage{marvosym}
-	\RequirePackage{xparse}
 
 
 % tikz
@@ -343,16 +342,9 @@
 		\coordinate (next left column anchor) at ([yshift=-9mm]applicant picture.south west);
 	}
 
-
-
-	\newcommand{\populateLeftColumn}{} % to be redefined in main document
-
 	\renewcommand*{\cvlistheadingfont}{\color{black!98}\fontseries{sb}\selectfont} % not large (which is the default)
-	\newcommand{\populateRightColumn}{} % to be redefined in main document
 
-
-
-	\newcommand{\makeCV}{%
+	\newcommand{\makeCV}[2]{%
 		
 		\newgeometry{margin=0pt}
 		\fancyhf{} % clear all header and footers
@@ -381,7 +373,7 @@
 
 			\coordinate (next left column anchor) at ([yshift=-13mm, xshift=12mm]leftcol fill.north west);
 
-			\populateLeftColumn
+			#1
 
 			\node[
 			  text width=.7\paperwidth,
@@ -392,8 +384,8 @@
 			  % minimum height=\pdfpageheight
 			] (cv) at (leftcol fill.north east) {
 
-				\setlength{\cvlabelwidth}{32mm}
-				\populateRightColumn
+				\setlength{\cvlabelwidth}{32mm}%
+				#2
 
 			};
 		\end{tikzpicture}
