@@ -81,41 +81,70 @@
 % 
 \makeCV{%
 
+	%
 	% Linke Spalte
-	\leftColumnPicture % Profilbild
-	\leftColumnApplicantNameAndPosition % Name und aktuelle Position
+	%
+	\setlist[itemize]{
+		topsep=0pt,
+		itemsep=-8pt,
+		itemindent=-12pt
+	} % Einstellungen zu Auflistungen
 
-	\begin{leftColumnItemize}{Schl\"usselkompetenzen}
+	\leftColumnPicture % Profilbild
+		\vspace{1.5em}
+
+	\heading{\LARGE\aName} % Name des Bewerbers
+
+	\textsf{\LARGE\aPosition} % Position des Bewerbers
+		\vspace{1em}
+
+	\heading{\large Schlüsselkompetenzen}
+		\vspace{-3pt}
+	\begin{itemize}
 		\item Gewebe
 		\item Textilien
 		\item Muster
-	\end{leftColumnItemize}
+	\end{itemize}
+		\vspace{.66em}
 
-	\begin{leftColumnItemize}{Referenzen}
+	\heading{\large Referenzen}
+		\vspace{-3pt}
+	\begin{itemize}
 		\item Mutter Theresa
 		\item Helmut Kohl
-	\end{leftColumnItemize}
+	\end{itemize}
+		\vspace{.66em}
 
-	\begin{leftColumnItemize}{Sprachen}
+	\heading{\large Sprachen}
+		\vspace{-3pt}
+	\begin{itemize}
 		\item Deutsch (Muttersprache)
 		\item English (Well well)
-	\end{leftColumnItemize}
+	\end{itemize}
+		\vspace{.66em}
 
-	\begin{leftColumnItemize}[label={}, itemsep=-12pt]{Kontakt}
+	\heading{\large Kontakt}
+		\vspace{-3pt}
+	\begin{itemize}[label={}, itemsep=-12pt]
 		\item \aStreet
 		\item \aCity \\[5mm]
 		\item \Telefon\hspace{6pt}\aPhone
 	    \item \Letter\hspace{7pt}\href{mailto:\aMail}{\texttt{\aMail}}
-	\end{leftColumnItemize}
+	\end{itemize}
+		\vspace{.66em}
 
-	% \begin{leftColumnItemize}[label={}, itemsep=-12pt]{Sonstiges}
+	% \heading{\large Sonstiges}
+	%	\vspace{-3pt}
+	% \begin{itemize}[label={}, itemsep=-12pt]
 	% 	\item \Lborn~\aBirthday
 	% 	\item \Lin~\aBirthplace
-	% \end{leftColumnItemize}
+	% \end{itemize}
 
 }{%
 
+	%
 	% Rechte Spalte
+	%
 	\begin{cvsection}{Schulbildung}
 		\item [04$\vert$1956 -- 05$\vert$1960] 	Muster-Grundschule Musterstadt
 		\item [07$\vert$1960 -- 05$\vert$1966] 	Städtische Realschule Musterstadt

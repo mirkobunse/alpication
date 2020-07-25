@@ -50,6 +50,11 @@
 
 % tikz
 	\usetikzlibrary{patterns}
+	\tikzstyle{left cv column default} = [
+	  text width=.25\paperwidth,
+	  anchor=north west,
+	  inner sep=12mm
+	]
 	\tikzstyle{left cv column} = [
 	  fill=blue!5,
 	  postaction={pattern=north west lines, pattern color=blue!1}
@@ -297,71 +302,27 @@
 %
 % main curriculum vitae environment
 %
-	\NewEnviron{leftColumnBlock}[1][]{%
-		\node[left cv column default, inner ysep=0mm]
-		  (last left column block) at (leftcol fill.west|-next left column anchor)
-		  {%
-			\fontsize{12pt}{21pt}\selectfont%
-			\ifthenelse{\equal{#1}{}}{}{\mbox{\sffamily\color{lightblack}\fontseries{sb}\selectfont\Large #1}\vspace{-2pt}}%
-			\BODY
-		  };
-		\coordinate (next left column anchor) at ([yshift=-9mm]last left column block.south west);
-	}
-
-	\NewEnviron{leftColumnItemize}[2][]{%
-		\node[left cv column default, inner ysep=0mm]
-		  (last left column block) at (leftcol fill.west|-next left column anchor)
-		  {%
-			\fontsize{12pt}{21pt}\selectfont%
-			\mbox{\sffamily\color{lightblack}\fontseries{sb}\selectfont\Large #2}\vspace{-2pt}%
-			\begin{itemize}[topsep=0pt, itemsep=-9pt, itemindent=-12pt, #1]
-				\BODY
-			\end{itemize}\par
-		  };
-		\coordinate (next left column anchor) at ([yshift=-9mm]last left column block.south west);
-	}
-
-	\newcommand{\leftColumnApplicantNameAndPosition}{%
-		\begin{leftColumnBlock}
-			{\sffamily\color{lightblack}\fontseries{sb}\selectfont\huge\raggedleft\aName}\par
-			{\sffamily\LARGE\aPosition}\par
-		\end{leftColumnBlock}
-	}
+	\newcommand{\heading}[1]{{\sffamily\fontseries{sb}\selectfont\color{lightblack}#1}}
+	\renewcommand*{\cvlistheadingfont}{\sffamily\fontseries{sb}\selectfont\color{black!98}}
 
 	\newcommand{\leftColumnPicture}{%
-		\node[
-		  fill=white,
-		  anchor=north west,
-		  rectangle,
-		  line width=\rulewidth,
-		  inner sep=2mm,
-		  outer sep=0mm,
-		  rounded corners
-		] (applicant picture) at ([xshift=12mm]leftcol fill.west|-next left column anchor)
-		{\includegraphics[width=.2\paperwidth]{\aPicture}};
-		\coordinate (next left column anchor) at ([yshift=-9mm]applicant picture.south west);
+		\begin{tikzpicture}
+			\node[
+			  fill=white,
+			  inner sep=2mm,
+			  outer sep=0mm,
+			  rounded corners,
+			  text width=.2\paperwidth
+			] (applicant picture) at (0,0)
+			{\includegraphics[width=.2\paperwidth]{\aPicture}};
+		\end{tikzpicture}
 	}
-
-	\renewcommand*{\cvlistheadingfont}{\color{black!98}\fontseries{sb}\selectfont} % not large (which is the default)
 
 	\newcommand{\makeCV}[2]{%
 		
 		\newgeometry{margin=0pt}
 		\fancyhf{} % clear all header and footers
 		\ClearShipoutPicture % remove background (header and footer boxes)
-		% \lhead{}
-		% \rhead{\sffamily\fontseries{el}\selectfont\color{lightblack}\Lpage~\thepage}
-		
-		\tikzstyle{left cv column default} = [
-		  text width=.25\paperwidth,
-		  anchor=north west,
-		  inner sep=12mm
-		]
-		
-		\tikzstyle{left cv column block} = [
-		  left cv column default,
-		  inner ysep=6mm
-		]
 
 		\begin{tikzpicture}
 			\node[
@@ -369,21 +330,26 @@
 			  text depth=\pdfpageheight-25mm,
 			  minimum height=\pdfpageheight,
 			  left cv column
-			] (leftcol fill) at (current page.north west) {}; % just the fill
+			] (left column fill) at (current page.north west) {}; % just the fill
 
-			\coordinate (next left column anchor) at ([yshift=-13mm, xshift=12mm]leftcol fill.north west);
+			\node[
+			  left cv column default
+			] (left column) at (current page.north west) {
 
-			#1
+				% content of left column
+				\fontsize{12pt}{21pt}\selectfont
+				#1
+
+			};
 
 			\node[
 			  text width=.7\paperwidth,
 			  anchor=north west,
 			  inner xsep=6mm,
 			  inner ysep=9mm
-			  % text depth=\pdfpageheight-25mm,
-			  % minimum height=\pdfpageheight
-			] (cv) at (leftcol fill.north east) {
+			] (cv) at (left column fill.north east) {
 
+				% content of right column
 				\setlength{\cvlabelwidth}{32mm}%
 				#2
 
