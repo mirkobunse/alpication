@@ -48,17 +48,16 @@
 	\RequirePackage{marvosym}
 
 
-% tikz
+% left CV column style
+	\newlength{\leftColumnWidth}
+	\setlength{\leftColumnWidth}{.3\paperwidth}
 	\usetikzlibrary{patterns}
-	\tikzstyle{left cv column default} = [
-	  text width=.25\paperwidth,
-	  anchor=north west,
-	  inner sep=12mm
-	]
-	\tikzstyle{left cv column} = [
+	\tikzstyle{header} = [
 	  fill=blue!5,
-	  postaction={pattern=north west lines, pattern color=blue!1}
+	  postaction={pattern=north east lines, pattern color=blue!1}
 	]
+	\tikzstyle{footer} = [header]
+	\tikzstyle{left cv column} = [header]
 	
 %
 % internationalization
@@ -128,19 +127,20 @@
 	\newcommand{\applicantNationality}[1]{\renewcommand{\aNationality}{#1}}
 	
 	\newcommand{\toAddress}[1]{\renewcommand{\toAddr}{#1}}
+
+
+%
+% basic styling
+%
+	\colorlet{lightblack}{black!95}
+	\newcommand{\heading}[1]{{\sffamily\fontseries{sb}\selectfont\color{lightblack}#1}}
+	\renewcommand*{\cvlistheadingfont}{\sffamily\fontseries{sb}\selectfont\color{black!98}}
+	\newcommand{\cunderline}[2]{\textcolor{#1}{ \underline{\textcolor{black}{#2}} }}
 	
 %
 % beginning and end of document
 %
-	\colorlet{lightblack}{black!95}
-	\colorlet{rulecolor}{lightblack} % default
-	\newlength{\rulewidth}
-	\setlength{\rulewidth}{.2pt}
-	\newcommand{\cunderline}[2]{\textcolor{#1}{ \underline{\textcolor{black}{#2}} }}
-			
 	\AtBeginDocument{
-
-		\sffamily
 
 		% background for header and footer
 		\AddToShipoutPictureBG{%
@@ -149,14 +149,14 @@
 				% header
 				\coordinate (header south west) at ([yshift=-19mm] current page.north west);
 				\coordinate (header south east) at ([yshift=-19mm] current page.north east);
-				\fill[blue!5, postaction={pattern=north west lines, pattern color=blue!1}]
+				\fill[header]
 				  (current page.north east) -- (current page.north west) -- (header south west) -- (header south east) -- cycle;
 				% \draw[thick, black!4] (header south west) -- (header south east);
 
 				% footer
 				\coordinate (footer north west) at ([yshift=21mm] current page.south west);
 				\coordinate (footer north east) at ([yshift=21mm] current page.south east);
-				\fill[blue!5, postaction={pattern=north west lines, pattern color=blue!1}]
+				\fill[footer]
 				  (footer north east) -- (footer north west) -- (current page.south west) -- (current page.south east) -- cycle;
 				% \draw[thick, black!4] (footer north west) -- (footer north east);
 
@@ -177,15 +177,10 @@
 		\pagestyle{fancy}
 		\setlength{\headheight}{24pt}
 		\setlength{\headsep}{36pt}
-		% \renewcommand{\headrulewidth}{\rulewidth}
-		% \renewcommand{\headrule}{\vspace*{-5pt}\hbox to\headwidth{\color{rulecolor}\leaders\hrule height \headrulewidth\hfill}}
 		\renewcommand{\headrule}{}
 		
 		\lhead{}
 		\rhead{\sffamily\fontseries{el}\selectfont\Large\color{lightblack}\aName}
-		
-		% \renewcommand{\footrulewidth}{\rulewidth}
-		% \renewcommand{\footrule}{\hbox to\headwidth{\color{rulecolor}\leaders\hrule height \footrulewidth\hfill}\vspace*{-2pt}}
 
 		\lfoot{\sffamily\fontseries{el}\selectfont\small\color{lightblack}\aName}
 		\cfoot{\sffamily\fontseries{el}\selectfont\small\color{lightblack}\aStreet~\\\aCity}
@@ -215,12 +210,12 @@
 		
 		\ifthenelse{\equal{\toAddr}{}}{}
 		{ % only print addresses, if actually defined
-			\cunderline{rulecolor}{\footnotesize\aName, \aStreet, \aCity}	% applicant address
+			\cunderline{lightblack}{\sffamily\footnotesize\aName, \aStreet, \aCity} % applicant address
 			
 			{\toAddr}		% addressees address
 		}
 	
-		\vspace{8mm}
+		\vspace{6mm}
 
 		\begin{flushright}		% the date
 			\today
@@ -230,9 +225,9 @@
 		
 		% the correspondence
 	
-		{\color{lightblack}\fontseries{sb}\selectfont\large#1}		% the subject
+		\heading{\large#1} % the subject
 
-		% \vspace{8mm}
+		\vspace{1em}
 		
 	}
 	% on end
@@ -245,13 +240,14 @@
 %
 % opening / closing commands for the correspondence
 %
-	\newcommand{\opening}[1]{#1\vspace{4mm}}
+	\newcommand{\opening}[1]{#1\vspace{.33em}}
 	\newcommand{\closing}[1]{%
 	
-		\vspace{4mm}#1
+		\vspace{.33em}#1
 		
-		\ifthenelse{\equal{\aSign}{}}{\vspace{8mm}}
+		\ifthenelse{\equal{\aSign}{}}{\vspace{6mm}}
 		{ % only print signet, if actually defined
+			\vspace{.33em}
 			\includegraphics{\aSign}
 			
 			\vspace{-16mm}
@@ -274,7 +270,7 @@
 		
 		\lhead{\sffamily\fontseries{el}\selectfont\color{lightblack}\Lpage~\thepage}
 		
-		{\color{lightblack}\fontseries{sb}\selectfont\Large\Lmotivation.} % \Large
+		\heading{\large\Lmotivation} % \Large
 		
 		% \vspace{8mm}
 		
@@ -302,9 +298,6 @@
 %
 % main curriculum vitae environment
 %
-	\newcommand{\heading}[1]{{\sffamily\fontseries{sb}\selectfont\color{lightblack}#1}}
-	\renewcommand*{\cvlistheadingfont}{\sffamily\fontseries{sb}\selectfont\color{black!98}}
-
 	\newcommand{\leftColumnPicture}{%
 		\begin{tikzpicture}
 			\node[
@@ -325,6 +318,12 @@
 		\ClearShipoutPicture % remove background (header and footer boxes)
 
 		\begin{tikzpicture}
+			\tikzstyle{left cv column default} = [
+			  text width=\leftColumnWidth-12mm,
+			  anchor=north west,
+			  inner sep=12mm
+			]
+
 			\node[
 			  left cv column default,
 			  text depth=\pdfpageheight-25mm,
@@ -333,24 +332,23 @@
 			] (left column fill) at (current page.north west) {}; % just the fill
 
 			\node[
-			  left cv column default
+			  left cv column default,
+			  text width=\leftColumnWidth
 			] (left column) at (current page.north west) {
 
 				% content of left column
-				\fontsize{12pt}{21pt}\selectfont
 				#1
 
 			};
 
 			\node[
-			  text width=.7\paperwidth,
+			  text width=\paperwidth-\leftColumnWidth,
 			  anchor=north west,
 			  inner xsep=6mm,
 			  inner ysep=9mm
 			] (cv) at (left column fill.north east) {
 
 				% content of right column
-				\setlength{\cvlabelwidth}{32mm}%
 				#2
 
 			};

@@ -32,21 +32,24 @@
 	% Optionale Informationen
 	\applicantBirthday	{01.02.1934}
 	\applicantBirthplace	{Musterstadt}
-% 	\applicantFamilyStatus	{Ledig}
-% 	\applicantNationality	{Deutsch}
 	
 	\toAddress{	Paul Personaler\\
 				Muster GmbH\\
 				Musterstraße 42\\
 				12345 Musterstadt	}
 
+	\tikzstyle{header} = [
+	  fill=blue!5,
+	  postaction={pattern=north east lines, pattern color=blue!1}
+	] % Farbe der Hintergründe in Header, Footer und CV
+
 \begin{document}
 
 % 
 % Das Anschreiben (optional)
 % 
-\begin{correspondence}{Bewerbung als Patroneur.}		% Betreffzeile
-	\opening{Sehr geehrter Herr Personaler,}	% Anrede
+\begin{correspondence}{Bewerbung als Patroneur} % Betreffzeile
+	\opening{Sehr geehrter Herr Personaler,} % Anrede
 
 	Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
 	et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
@@ -58,20 +61,19 @@
 
 	\closing{Mit freundlichen Grüßen}
 	
-	\appendixList	% optional: Auflistung der Anhänge, benötigt 2-fache Ausführung von LaTeX
+	\appendixList % optional: Auflistung der Anhänge, benötigt 2-fache Ausführung von LaTeX
 	
 \end{correspondence}
 
 % 
-% Motivationsschreiben (optional; manchmal für Bewerbungen auf Studienplätze und Praktika gefordert). Die Umgebung kann
-% beliebig verschoben werden, zB hinter den Lebenslauf.
+% Motivationsschreiben (optional; manchmal für Bewerbungen auf Studienplätze und Praktika gefordert).
 %
-\begin{motivation}
-	Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-	consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-	sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-	takimata sanctus est Lorem ipsum dolor sit amet.
-\end{motivation}
+% \begin{motivation}
+% 	Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+% 	consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+% 	sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+% 	takimata sanctus est Lorem ipsum dolor sit amet.
+% \end{motivation}
 
 
 %
@@ -79,62 +81,62 @@
 %
 % Nutzung: \makeCV{<linke Spalte>}{<rechte Spalte>}
 % 
+\setlength{\leftColumnWidth}{.3\paperwidth} % Breite der linken Spalte (Standard: .3\paperwidth)
 \makeCV{%
 
 	%
 	% Linke Spalte
 	%
+	\large
 	\setlist[itemize]{
-		topsep=0pt,
-		itemsep=-8pt,
-		itemindent=-12pt
+		topsep=3pt,
+		itemsep=0pt,
+		itemindent=-9pt,
+		label=\raisebox{2pt}{\scalebox{.5}{$\bullet$}}
 	} % Einstellungen zu Auflistungen
 
 	\leftColumnPicture % Profilbild
-		\vspace{1.5em}
+		\vspace{2em}
 
 	\heading{\LARGE\aName} % Name des Bewerbers
+		\vspace{.66em}
 
 	\textsf{\LARGE\aPosition} % Position des Bewerbers
-		\vspace{1em}
+		\vspace{2em}
 
-	\heading{\large Schlüsselkompetenzen}
-		\vspace{-3pt}
+	\heading{Schlüsselkompetenzen}
 	\begin{itemize}
 		\item Gewebe
 		\item Textilien
 		\item Muster
 	\end{itemize}
-		\vspace{.66em}
+		\vspace{1.5em}
 
-	\heading{\large Referenzen}
-		\vspace{-3pt}
+	\heading{Referenzen}
 	\begin{itemize}
 		\item Mutter Theresa
 		\item Helmut Kohl
 	\end{itemize}
-		\vspace{.66em}
+		\vspace{1.5em}
 
-	\heading{\large Sprachen}
-		\vspace{-3pt}
+	\heading{Sprachen}
 	\begin{itemize}
 		\item Deutsch (Muttersprache)
 		\item English (Well well)
 	\end{itemize}
-		\vspace{.66em}
+		\vspace{1.5em}
 
-	\heading{\large Kontakt}
-		\vspace{-3pt}
-	\begin{itemize}[label={}, itemsep=-12pt]
+	\heading{Kontakt}
+	\begin{itemize}[label={}, itemsep=-5pt]
 		\item \aStreet
-		\item \aCity \\[5mm]
+		\item \aCity \\[1em]
 		\item \Telefon\hspace{6pt}\aPhone
 	    \item \Letter\hspace{7pt}\href{mailto:\aMail}{\texttt{\aMail}}
 	\end{itemize}
-		\vspace{.66em}
+		\vspace{1.5em}
 
 	% \heading{\large Sonstiges}
-	%	\vspace{-3pt}
+
 	% \begin{itemize}[label={}, itemsep=-12pt]
 	% 	\item \Lborn~\aBirthday
 	% 	\item \Lin~\aBirthplace
@@ -145,14 +147,16 @@
 	%
 	% Rechte Spalte
 	%
+	\setlength{\cvlabelwidth}{32mm} % Breite der Zeiten
+
 	\begin{cvsection}{Schulbildung}
-		\item [04$\vert$1956 -- 05$\vert$1960] 	Muster-Grundschule Musterstadt
-		\item [07$\vert$1960 -- 05$\vert$1966] 	Städtische Realschule Musterstadt
+		\item [04/1956 -- 05/1960] 	Muster-Grundschule Musterstadt
+		\item [07/1960 -- 05/1966] 	Städtische Realschule Musterstadt
 	\end{cvsection}
 
 	\begin{cvsection}{Ausbildung}
-		\item [06$\vert$1966 -- 08$\vert$1969] 	Patroneursausbildung Stickerei Mustermacher,\\Spezialisierung auf Gewebe
-		\item [07$\vert$1968]			Muster-Design-Workshop
+		\item [06/1966 -- 08/1969] 	Patroneursausbildung Stickerei Mustermacher,\\Spezialisierung auf Gewebe
+		\item [07/1968]			Muster-Design-Workshop
 	\end{cvsection}
 
 } % Ende von \makeCV
